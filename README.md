@@ -1,4 +1,4 @@
-# Sound Party Game
+# Foley Fools
 
 A browser game for online meetings with up to 20 active players. The host shares the game screen and audio; players join from a phone or computer, enter a display name, record short sound effects, and vote for their favorite clip. No accounts are required.
 
