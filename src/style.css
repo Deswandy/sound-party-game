@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root { font-family: 'DM Sans', sans-serif; color: #f9f6ff; background: #171426; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: radial-gradient(circle at 83% 12%, #493474 0, transparent 34%), radial-gradient(circle at 10% 75%, #2b2e5b 0, transparent 35%), #171426; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+.shell { max-width: 1120px; min-height: 100vh; margin: auto; padding: 28px clamp(22px, 5vw, 72px) 42px; display: flex; flex-direction: column; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: flex; gap: 11px; align-items: center; font: 700 21px 'Space Grotesk', sans-serif; letter-spacing: -.05em; }
+.brand::first-letter { color: #e88cff; }
+.tag { color: #c4bad7; font-size: 13px; }
+.hero { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 56px 0 36px; }
+.eyebrow, .card-kicker { color: #eb9aff; font-size: 12px; font-weight: 700; letter-spacing: .17em; }
+h1 { max-width: 760px; margin: 19px 0 12px; font: 700 clamp(43px, 7vw, 82px)/1.04 'Space Grotesk', sans-serif; letter-spacing: -.065em; }
+.intro { max-width: 620px; color: #c9c0d8; font-size: clamp(16px, 2vw, 19px); line-height: 1.58; margin: 8px 0 35px; }
+.card { width: min(100%, 430px); text-align: left; border: 1px solid #6e598a; border-radius: 24px; background: #292238; box-shadow: 0 22px 65px #0c061a70; padding: 30px; }
+.card h2 { font: 700 25px 'Space Grotesk', sans-serif; margin: 12px 0 18px; letter-spacing: -.04em; }
+.card p { color: #d0c6db; line-height: 1.55; }
+label { display: block; font-weight: 700; font-size: 13px; margin: 17px 0 8px; }
+input { display: block; width: 100%; padding: 14px 16px; border: 1px solid #7d6a91; border-radius: 12px; color: white; background: #1d192a; font: inherit; outline: none; }
+input:focus { border-color: #e5a4f2; box-shadow: 0 0 0 3px #e5a4f22b; }
+input::placeholder { color: #9b91ab; }
+button { display: block; width: 100%; margin-top: 23px; padding: 15px 18px; border: 0; border-radius: 12px; background: #eab2f6; color: #2b1635; font: 700 15px 'DM Sans', sans-serif; }
+button:disabled { opacity: .72; cursor: not-allowed; }
+.footnote { margin-top: 24px; color: #a89bb8; font-size: 13px; }
+.switch { align-self: center; color: #eab2f6; font-weight: 700; padding: 12px; }
+@media (max-width: 600px) { .tag { display: none; } .hero { padding-top: 70px; } .card { padding: 23px; } }
