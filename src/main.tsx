@@ -7,6 +7,15 @@ import './style.css';
 const isHost = location.pathname === '/host';
 const queryCode = new URLSearchParams(location.search).get('code')?.toUpperCase() ?? '';
 
+class ApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+  }
+}
+
 async function request<T>(
   path: string,
   method: string,
@@ -22,7 +31,7 @@ async function request<T>(
     ...(body ? { body: JSON.stringify(body) } : {}),
   });
   const data = (await response.json()) as T & { error?: string };
-  if (!response.ok) throw new Error(data.error ?? 'Something went wrong');
+  if (!response.ok) throw new ApiError(data.error ?? 'Something went wrong', response.status);
   return data;
 }
 
@@ -36,6 +45,17 @@ function App() {
   const [qr, setQr] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const savedHostCode = localStorage.getItem('foley-host-code');
+  const canOpenHost = Boolean(savedHostCode && localStorage.getItem(`foley-host-${savedHostCode}`));
+
+  function forgetSession(codeToForget: string) {
+    localStorage.removeItem(`foley-${isHost ? 'host' : 'player'}-${codeToForget}`);
+    localStorage.removeItem(isHost ? 'foley-host-code' : 'foley-player-code');
+    if (!isHost) localStorage.removeItem(`foley-player-id-${codeToForget}`);
+    setRoomCode('');
+    setSession('');
+    setLobby(null);
+  }
 
   useEffect(() => {
     const savedCode = localStorage.getItem(isHost ? 'foley-host-code' : 'foley-player-code');
@@ -64,7 +84,12 @@ function App() {
           setError('');
         }
       } catch (cause) {
-        if (!cancelled) setError((cause as Error).message);
+        if (!cancelled) {
+          if (cause instanceof ApiError && [401, 404].includes(cause.status)) {
+            forgetSession(roomCode);
+          }
+          setError((cause as Error).message);
+        }
       }
     }
     void refresh();
@@ -132,6 +157,27 @@ function App() {
     }
   }
 
+  async function leaveLobby() {
+    setBusy(true);
+    setError('');
+    try {
+      if (isHost) {
+        if (!confirm('Close this room for everyone?')) return;
+        await request(`/api/rooms/${roomCode}`, 'DELETE', undefined, session);
+        forgetSession(roomCode);
+        location.href = '/host';
+      } else {
+        await request(`/api/rooms/${roomCode}/me`, 'DELETE', undefined, session);
+        forgetSession(roomCode);
+        location.href = '/';
+      }
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <main class="shell">
       <nav class="topbar" aria-label="Main navigation">
@@ -193,6 +239,24 @@ function App() {
               <small>
                 {isHost ? 'Keep this tab open while hosting.' : 'You’re in! Keep this tab open.'}
               </small>
+              <button class="secondary" disabled={busy} onClick={() => void leaveLobby()}>
+                {isHost ? 'Close room' : 'Leave game'}
+              </button>
+              {isHost && (
+                <a
+                  class="switch lobby-switch"
+                  href={joinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Join as a player
+                </a>
+              )}
+              {!isHost && canOpenHost && (
+                <a class="switch lobby-switch" href="/host">
+                  Open host lobby
+                </a>
+              )}
             </>
           ) : isHost ? (
             <>
@@ -231,9 +295,16 @@ function App() {
           )}
         </div>
         {!roomCode && (
-          <a class="switch" href={isHost ? '/' : '/host'}>
-            {isHost ? 'Join a game' : 'Host a game'}
-          </a>
+          <>
+            <a class="switch" href={isHost ? '/' : '/host'}>
+              {isHost ? 'Join a game' : 'Host a game'}
+            </a>
+            {!isHost && canOpenHost && (
+              <a class="switch" href="/host">
+                Open host lobby
+              </a>
+            )}
+          </>
         )}
       </section>
     </main>

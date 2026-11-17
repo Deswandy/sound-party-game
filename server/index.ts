@@ -179,6 +179,32 @@ app.get('/api/rooms/:code/state', async (c) => {
   });
 });
 
+app.delete('/api/rooms/:code/me', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  const secret = bearer(c.req.header('authorization'));
+  if (!secret) return c.json({ error: 'Player access required' }, 401);
+  const result = await c.env.DB.prepare(
+    'UPDATE players SET active = 0 WHERE room_id = ? AND session_secret_hash = ? AND active = 1',
+  )
+    .bind(room!.id, await hash(secret))
+    .run();
+  if (result.meta.changes !== 1) return c.json({ error: 'Player access required' }, 401);
+  return c.json({ ok: true });
+});
+
+app.delete('/api/rooms/:code', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  await c.env.DB.prepare("UPDATE rooms SET phase = 'ended' WHERE id = ?").bind(room!.id).run();
+  return c.json({ ok: true });
+});
+
 app.delete('/api/rooms/:code/players/:id', async (c) => {
   if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
   const room = await getRoom(c.env.DB, c.req.param('code'));

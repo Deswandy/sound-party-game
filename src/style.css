@@ -181,6 +181,11 @@ small {
   background: transparent;
   color: #a9e4ff;
 }
+.lobby-switch {
+  display: block;
+  text-align: center;
+  margin: 5px auto 0;
+}
 h2 {
   font:
     700 20px 'Space Grotesk',
