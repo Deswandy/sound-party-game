@@ -18,7 +18,8 @@ export default {
     return new Response(assets[path], {
       headers: {
         'content-type': contentTypes[extension] || 'text/plain; charset=utf-8',
-        'cache-control': path === '/index.html' ? 'no-cache' : 'public, max-age=31536000, immutable',
+        'cache-control':
+          path === '/index.html' ? 'no-cache' : 'public, max-age=31536000, immutable',
       },
     });
   },

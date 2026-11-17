@@ -17,7 +17,10 @@ async function collect(dir) {
 
 await collect(root);
 await mkdir('work/generated', { recursive: true });
-await writeFile('work/generated/assets.ts', `export const assets: Record<string, string> = ${JSON.stringify(files)};\n`);
+await writeFile(
+  'work/generated/assets.ts',
+  `export const assets: Record<string, string> = ${JSON.stringify(files)};\n`,
+);
 await esbuild({
   entryPoints: ['server/deploy.ts'],
   bundle: true,

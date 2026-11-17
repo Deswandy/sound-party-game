@@ -1,12 +1,6 @@
 export const MAX_PLAYERS = 20;
 
-export type GamePhase =
-  | 'lobby'
-  | 'recording'
-  | 'playback'
-  | 'voting'
-  | 'results'
-  | 'ended';
+export type GamePhase = 'lobby' | 'recording' | 'playback' | 'voting' | 'results' | 'ended';
 
 export type RoomState = {
   code: string;

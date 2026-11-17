@@ -8,6 +8,8 @@ The implementation uses TypeScript with Preact and Vite for the browser interfac
 
 Run `npm install`, then `npm run check` and `npm run build`. `npm run dev` starts the browser UI locally. The production build is a single Worker module at `dist/server/index.js` containing the browser assets and API.
 
+Run `npm run format` to format source files with Oxfmt, or `npm run format:check` to check them without changes. VS Code recommends the Oxc extension and enables format on save for this workspace.
+
 ## Plans
 
 - [Game behaviour](outputs/sound-party-game-behaviour.md)

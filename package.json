@@ -6,6 +6,8 @@
     "dev": "vite --host 127.0.0.1",
     "build": "node scripts/build.mjs",
     "check": "tsc --noEmit",
+    "format": "oxfmt src server shared scripts index.html vite.config.ts tsconfig.json package.json",
+    "format:check": "oxfmt --check src server shared scripts index.html vite.config.ts tsconfig.json package.json",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
@@ -15,6 +17,7 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "esbuild": "^0.25.0",
+    "oxfmt": "^0.79.0",
     "typescript": "^5.9.0",
     "vite": "^7.1.0",
     "wrangler": "^4.0.0"
