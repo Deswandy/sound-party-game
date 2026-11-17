@@ -1,0 +1,14 @@
+{
+  "name": "foley-fools-local",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2025-04-01",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "foley-local",
+      "database_id": "00000000-0000-0000-0000-000000000001",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "r2_buckets": [{ "binding": "BUCKET", "bucket_name": "foley-local" }]
+}

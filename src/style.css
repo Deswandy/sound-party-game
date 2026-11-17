@@ -112,6 +112,7 @@ button {
   font:
     700 15px 'DM Sans',
     sans-serif;
+  cursor: pointer;
 }
 button:disabled {
   opacity: 0.72;
@@ -128,6 +129,100 @@ small {
   color: #a9e4ff;
   font-weight: 700;
   padding: 12px;
+}
+.lobby {
+  width: min(100%, 560px);
+}
+.room-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.room-heading span {
+  color: #d6e8ff;
+  font-weight: 700;
+}
+.room-code {
+  font:
+    700 32px 'Space Grotesk',
+    sans-serif;
+  letter-spacing: 0.14em;
+  color: #a9e4ff;
+}
+.count {
+  margin: 10px 0 20px !important;
+}
+.sharing {
+  border-top: 1px solid #76a9e4;
+  border-bottom: 1px solid #76a9e4;
+  padding: 20px 0;
+}
+.sharing p {
+  text-align: center;
+}
+.qr {
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: 18px auto;
+  border-radius: 8px;
+}
+.join-link {
+  display: block;
+  overflow-wrap: anywhere;
+  text-align: center;
+  color: #a9e4ff;
+  text-decoration: underline;
+}
+.secondary {
+  margin-top: 15px;
+  border: 1px solid #a9e4ff;
+  background: transparent;
+  color: #a9e4ff;
+}
+h2 {
+  font:
+    700 20px 'Space Grotesk',
+    sans-serif;
+  margin: 22px 0 14px;
+}
+.players {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-height: 340px;
+  overflow: auto;
+}
+.players li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 13px;
+  border-radius: 10px;
+  background: #0e3369;
+}
+.remove {
+  width: auto;
+  margin: 0;
+  padding: 7px 10px;
+  background: transparent;
+  color: #a9e4ff;
+  border: 1px solid #76a9e4;
+  font-size: 12px;
+}
+.waiting {
+  color: #d6e8ff;
+}
+.error {
+  color: #fff;
+  background: #a82345;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 16px !important;
 }
 @media (max-width: 600px) {
   .hero {

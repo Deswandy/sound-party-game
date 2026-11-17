@@ -11,3 +11,16 @@ export type RoomState = {
 };
 
 export type HealthResponse = { status: 'ok'; service: 'sound-party-game' };
+
+export type LobbyPlayer = { id: string; name: string };
+
+export type LobbyState = {
+  code: string;
+  phase: 'lobby';
+  players: LobbyPlayer[];
+  maxPlayers: number;
+  expiresAt: number;
+};
+
+export type CreateRoomResponse = { code: string; hostToken: string };
+export type JoinRoomResponse = { playerId: string; playerToken: string };
