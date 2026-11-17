@@ -42,7 +42,7 @@ Add automatic expiry and deletion of temporary audio and room data, server-side 
 
 - Confirm the six slices and their order, or merge/split any slice.
 - Confirm that invited players may open the public game URL with a room code. The public repository does not itself make a deployed game accessible.
-- Choose a recording limit. Proposed default: 10 seconds per clip.
+- Recording limit: 30 seconds per clip, as chosen for ticket 3.
 - Choose whether the host can join as a player from a second tab/device. Proposed default: yes, as a normal player slot.
 
 The [behavior spec](sound-party-game-behaviour.md) defines what players experience. The [technical plan](sound-party-game-technical-plan.md) defines the proposed architecture.

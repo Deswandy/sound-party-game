@@ -16,10 +16,14 @@ export type LobbyPlayer = { id: string; name: string };
 
 export type LobbyState = {
   code: string;
-  phase: 'lobby';
+  phase: GamePhase;
   players: LobbyPlayer[];
   maxPlayers: number;
   expiresAt: number;
+  roundId: string | null;
+  prompt: string | null;
+  submissionCount: number;
+  mySubmitted: boolean;
 };
 
 export type CreateRoomResponse = { code: string; hostToken: string };

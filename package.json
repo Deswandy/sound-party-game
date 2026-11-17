@@ -6,9 +6,10 @@
     "dev": "vite --host 127.0.0.1",
     "build": "node scripts/build.mjs",
     "check": "tsc --noEmit",
+    "test:recording": "node tests/recording-api.mjs",
     "db:generate": "drizzle-kit generate",
-    "format": "oxfmt src server shared scripts db index.html vite.config.ts tsconfig.json package.json drizzle.config.ts",
-    "format:check": "oxfmt --check src server shared scripts db index.html vite.config.ts tsconfig.json package.json drizzle.config.ts",
+    "format": "oxfmt src server shared scripts tests db index.html vite.config.ts tsconfig.json package.json drizzle.config.ts",
+    "format:check": "oxfmt --check src server shared scripts tests db index.html vite.config.ts tsconfig.json package.json drizzle.config.ts",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

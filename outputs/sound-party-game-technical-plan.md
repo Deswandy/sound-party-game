@@ -9,7 +9,7 @@ The first version is intentionally small:
 - No accounts, passwords, profiles, chat, downloads, or permanent leaderboards.
 - One game room at a time per host.
 - A maximum of 20 connected players in a room.
-- Short audio clips only (target: 5–10 seconds each).
+- Audio clips up to 30 seconds each.
 - Temporary game data and automatic deletion after the game/inactivity expiry.
 
 ## 2. Product shape
@@ -129,6 +129,7 @@ Audio upload has a strict server-side size limit and accepts only a small allowl
 - Request microphone permission only after the player taps **Record**.
 - Use the browser `MediaRecorder` API and choose a supported audio-only MIME type at runtime.
 - Stop automatically at the configured duration and give the player a preview before submission.
+- The recording limit is 30 seconds per clip; the host closes the overall recording phase.
 - Compress/limit clips through duration and upload size constraints rather than expensive server transcoding.
 - Give clear recovery text for denied permissions, unsupported browsers, and interrupted uploads.
 

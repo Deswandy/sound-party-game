@@ -27,3 +27,32 @@ export const players = sqliteTable(
   },
   (table) => [uniqueIndex('players_room_session').on(table.roomId, table.sessionSecretHash)],
 );
+
+export const rounds = sqliteTable('rounds', {
+  id: text('id').primaryKey(),
+  roomId: text('room_id')
+    .notNull()
+    .references(() => rooms.id),
+  prompt: text('prompt').notNull(),
+  createdAt: integer('created_at').notNull(),
+  endedAt: integer('ended_at'),
+});
+
+export const clips = sqliteTable(
+  'clips',
+  {
+    id: text('id').primaryKey(),
+    roundId: text('round_id')
+      .notNull()
+      .references(() => rounds.id),
+    playerId: text('player_id')
+      .notNull()
+      .references(() => players.id),
+    storageKey: text('storage_key').notNull(),
+    mimeType: text('mime_type').notNull(),
+    durationMs: integer('duration_ms').notNull(),
+    submittedAt: integer('submitted_at').notNull(),
+    status: text('status').notNull().default('submitted'),
+  },
+  (table) => [uniqueIndex('clips_round_player').on(table.roundId, table.playerId)],
+);

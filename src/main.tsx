@@ -2,10 +2,16 @@ import { render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import QRCode from 'qrcode';
 import type { CreateRoomResponse, JoinRoomResponse, LobbyState } from '../shared/game';
+import { Recorder } from './Recorder';
 import './style.css';
 
 const isHost = location.pathname === '/host';
 const queryCode = new URLSearchParams(location.search).get('code')?.toUpperCase() ?? '';
+const prompts = [
+  'Make the sound of a balloon slowly deflating.',
+  'Make the sound of a tiny spaceship taking off.',
+  'Make the sound of a monster trying to be quiet.',
+];
 
 class ApiError extends Error {
   constructor(
@@ -45,6 +51,8 @@ function App() {
   const [qr, setQr] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [promptChoice, setPromptChoice] = useState(prompts[0]);
+  const [customPrompt, setCustomPrompt] = useState('');
   const savedHostCode = localStorage.getItem('foley-host-code');
   const canOpenHost = Boolean(savedHostCode && localStorage.getItem(`foley-host-${savedHostCode}`));
 
@@ -157,6 +165,47 @@ function App() {
     }
   }
 
+  async function startRound() {
+    setBusy(true);
+    setError('');
+    try {
+      const result = await request<{ roundId: string; prompt: string }>(
+        `/api/rooms/${roomCode}/rounds`,
+        'POST',
+        { prompt: promptChoice === 'custom' ? customPrompt : promptChoice },
+        session,
+      );
+      setLobby(
+        (current) =>
+          current && {
+            ...current,
+            phase: 'recording',
+            roundId: result.roundId,
+            prompt: result.prompt,
+            submissionCount: 0,
+            mySubmitted: false,
+          },
+      );
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function closeRecording() {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/close-recording`, 'POST', undefined, session);
+      setLobby((current) => current && { ...current, phase: 'playback' });
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function leaveLobby() {
     setBusy(true);
     setError('');
@@ -186,7 +235,17 @@ function App() {
         </a>
       </nav>
       <section class="hero">
-        <h1>{roomCode ? 'Game Lobby' : isHost ? 'Host Game' : 'Join Game'}</h1>
+        <h1>
+          {roomCode
+            ? lobby?.phase === 'recording'
+              ? 'Record a Sound'
+              : lobby?.phase === 'playback'
+                ? 'Recording Closed'
+                : 'Game Lobby'
+            : isHost
+              ? 'Host Game'
+              : 'Join Game'}
+        </h1>
         <div class={`card ${roomCode ? 'lobby' : ''}`}>
           {roomCode ? (
             <>
@@ -194,10 +253,12 @@ function App() {
                 <span>Room code</span>
                 <strong class="room-code">{roomCode}</strong>
               </div>
-              <p class="count">
-                {lobby?.players.length ?? 0} / {lobby?.maxPlayers ?? 20} players
-              </p>
-              {isHost && (
+              {lobby?.phase === 'lobby' && (
+                <p class="count">
+                  {lobby.players.length} / {lobby.maxPlayers} players
+                </p>
+              )}
+              {isHost && lobby?.phase === 'lobby' && (
                 <div class="sharing">
                   <p>Share this link or code with your players.</p>
                   {qr && <img class="qr" src={qr} alt={`QR code to join room ${roomCode}`} />}
@@ -212,33 +273,113 @@ function App() {
                   </button>
                 </div>
               )}
-              <h2>Players</h2>
-              {lobby?.players.length ? (
-                <ul class="players">
-                  {lobby.players.map((player) => (
-                    <li key={player.id}>
-                      <span>
-                        {player.name}
-                        {player.id === playerId && !isHost ? ' (you)' : ''}
-                      </span>
-                      {isHost && (
-                        <button
-                          class="remove"
-                          aria-label={`Remove ${player.name}`}
-                          onClick={() => void removePlayer(player.id)}
-                        >
-                          Remove
-                        </button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p class="waiting">Waiting for players…</p>
+              {lobby?.phase === 'lobby' && <h2>Players</h2>}
+              {lobby?.phase === 'lobby' &&
+                (lobby.players.length ? (
+                  <ul class="players">
+                    {lobby.players.map((player) => (
+                      <li key={player.id}>
+                        <span>
+                          {player.name}
+                          {player.id === playerId && !isHost ? ' (you)' : ''}
+                        </span>
+                        {isHost && (
+                          <button
+                            class="remove"
+                            aria-label={`Remove ${player.name}`}
+                            onClick={() => void removePlayer(player.id)}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="waiting">Waiting for players…</p>
+                ))}
+              {isHost && lobby?.phase === 'lobby' && (
+                <div class="round-setup">
+                  <h2>Start a round</h2>
+                  <label htmlFor="prompt">Sound prompt</label>
+                  <select
+                    id="prompt"
+                    value={promptChoice}
+                    onChange={(event) => setPromptChoice(event.currentTarget.value)}
+                  >
+                    {prompts.map((prompt) => (
+                      <option value={prompt} key={prompt}>
+                        {prompt}
+                      </option>
+                    ))}
+                    <option value="custom">Write my own prompt</option>
+                  </select>
+                  {promptChoice === 'custom' && (
+                    <input
+                      aria-label="Custom sound prompt"
+                      value={customPrompt}
+                      maxLength={160}
+                      onInput={(event) => setCustomPrompt(event.currentTarget.value)}
+                      placeholder="What sound should players make?"
+                    />
+                  )}
+                  <button
+                    disabled={busy || !lobby.players.length}
+                    onClick={() => void startRound()}
+                  >
+                    {busy ? 'Starting…' : 'Start recording round'}
+                  </button>
+                </div>
               )}
-              <small>
-                {isHost ? 'Keep this tab open while hosting.' : 'You’re in! Keep this tab open.'}
-              </small>
+              {lobby?.phase === 'recording' && (
+                <div class="round-active">
+                  <p class="prompt">{lobby.prompt}</p>
+                  {isHost ? (
+                    <>
+                      <p class="count">
+                        {lobby.submissionCount} of {lobby.players.length} submitted
+                      </p>
+                      <button
+                        disabled={busy || lobby.submissionCount === 0}
+                        onClick={() => void closeRecording()}
+                      >
+                        {busy ? 'Closing…' : 'Close recording'}
+                      </button>
+                    </>
+                  ) : (
+                    lobby.roundId && (
+                      <Recorder
+                        key={lobby.roundId}
+                        code={roomCode}
+                        token={session}
+                        submitted={lobby.mySubmitted}
+                        onSubmitted={() =>
+                          setLobby(
+                            (current) =>
+                              current && {
+                                ...current,
+                                submissionCount:
+                                  current.submissionCount + (current.mySubmitted ? 0 : 1),
+                                mySubmitted: true,
+                              },
+                          )
+                        }
+                      />
+                    )
+                  )}
+                </div>
+              )}
+              {lobby?.phase === 'playback' && (
+                <div class="round-active">
+                  <p class="prompt">{lobby.prompt}</p>
+                  <p>Recording is closed. Playback and voting are coming in the next build.</p>
+                </div>
+              )}
+              {lobby?.phase === 'lobby' && (
+                <small>
+                  {isHost ? 'Keep this tab open while hosting.' : 'You’re in! Keep this tab open.'}
+                </small>
+              )}
               <button class="secondary" disabled={busy} onClick={() => void leaveLobby()}>
                 {isHost ? 'Close room' : 'Leave game'}
               </button>
