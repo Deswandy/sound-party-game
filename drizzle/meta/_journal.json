@@ -15,6 +15,13 @@
       "when": 1794906235835,
       "tag": "0001_vengeful_kabuki",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794909621856,
+      "tag": "0002_odd_secret_warriors",
+      "breakpoints": true
     }
   ]
 }

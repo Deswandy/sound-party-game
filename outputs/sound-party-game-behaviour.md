@@ -52,6 +52,7 @@ Players can:
 - The game generates a short, hard-to-guess room code and a QR code containing the join link.
 - Players join with a display name.
 - The host sees a live player list and begins when ready.
+- Players may warm up their microphone and mark themselves ready in the lobby.
 - The room supports up to 20 active players.
 
 ### 2. Prompt and recording
@@ -62,6 +63,7 @@ Players can:
 - A player taps Record, makes their sound, stops the recording, previews it, then submits it.
 - A player may replace their clip until the recording phase ends.
 - The host screen shows submission progress, such as `14 of 18 submitted`, but not clip contents.
+- Each clip can be at most 30 seconds long. The host controls when the recording phase ends.
 - The host may end the phase early when everyone has submitted.
 
 ### 3. Anonymous playback
@@ -70,6 +72,7 @@ Players can:
 - Player names remain hidden during playback.
 - Players see which clip number is currently playing, for example `Clip 7 of 18`.
 - The host can replay a clip.
+- The host plays the clips in order through the meeting's shared audio.
 
 ### 4. Voting
 
@@ -82,7 +85,9 @@ Players can:
 
 - The host screen reveals the winning clip, its creator's display name, and vote total.
 - Optionally, second and third place are shown.
-- The host can begin a new prompt, keeping the same room and players, or end the game.
+- Tied winners are shown together. The winning sound is played again with an original scene card.
+- Overall scores count votes received across three rounds.
+- After each of the first two rounds, the host can return to the lobby with the same players. After round three, the host can restart the game with the same players or close the room.
 
 ## Constraints and privacy
 

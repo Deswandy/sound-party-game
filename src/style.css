@@ -224,6 +224,110 @@ small {
   margin-top: 18px !important;
   color: #a9e4ff !important;
 }
+.clip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 9px;
+  margin: 18px 0;
+}
+.clip {
+  margin: 0;
+  padding: 12px;
+  background: #0e3369;
+  color: #d6e8ff;
+  border: 1px solid #76a9e4;
+}
+.clip.selected {
+  background: #a9e4ff;
+  color: #0b3567;
+}
+.playback audio {
+  display: block;
+  width: 100%;
+  margin: 18px 0;
+}
+.scene {
+  margin: 18px 0;
+  padding: 28px;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #0e3369;
+  border: 2px solid #a9e4ff;
+  border-radius: 15px;
+}
+.scene-label {
+  color: #a9e4ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+}
+.scene p {
+  font:
+    700 22px/1.3 'Space Grotesk',
+    sans-serif;
+  margin-top: 16px;
+}
+.scene-art {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  margin-top: 18px;
+  border: 3px solid #a9e4ff;
+  border-radius: 50%;
+  background: #194b92;
+}
+.scene-art span {
+  font:
+    700 36px 'Space Grotesk',
+    sans-serif;
+  animation: bounce-note 1.6s ease-in-out infinite;
+}
+.scene audio {
+  width: 100%;
+  margin-top: 18px;
+}
+@keyframes bounce-note {
+  50% {
+    transform: translateY(-9px);
+  }
+}
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.results li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #76a9e4;
+}
+.mic-check {
+  border-top: 1px solid #76a9e4;
+  margin-top: 22px;
+  padding-top: 4px;
+}
+.meter {
+  height: 14px;
+  width: 100%;
+  margin: 18px 0 4px;
+  border-radius: 7px;
+  background: #0e3369;
+  overflow: hidden;
+}
+.meter span {
+  display: block;
+  height: 100%;
+  background: #a9e4ff;
+  transition: width 80ms linear;
+}
 h2 {
   font:
     700 20px 'Space Grotesk',

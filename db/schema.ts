@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
+import { integer, primaryKey, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
 export const rooms = sqliteTable('rooms', {
   id: text('id').primaryKey(),
@@ -24,6 +24,7 @@ export const players = sqliteTable(
     joinedAt: integer('joined_at').notNull(),
     lastSeenAt: integer('last_seen_at').notNull(),
     active: integer('active').notNull().default(1),
+    ready: integer('ready').notNull().default(0),
   },
   (table) => [uniqueIndex('players_room_session').on(table.roomId, table.sessionSecretHash)],
 );
@@ -36,6 +37,7 @@ export const rounds = sqliteTable('rounds', {
   prompt: text('prompt').notNull(),
   createdAt: integer('created_at').notNull(),
   endedAt: integer('ended_at'),
+  playbackIndex: integer('playback_index').notNull().default(-1),
 });
 
 export const clips = sqliteTable(
@@ -55,4 +57,21 @@ export const clips = sqliteTable(
     status: text('status').notNull().default('submitted'),
   },
   (table) => [uniqueIndex('clips_round_player').on(table.roundId, table.playerId)],
+);
+
+export const votes = sqliteTable(
+  'votes',
+  {
+    roundId: text('round_id')
+      .notNull()
+      .references(() => rounds.id),
+    playerId: text('player_id')
+      .notNull()
+      .references(() => players.id),
+    clipId: text('clip_id')
+      .notNull()
+      .references(() => clips.id),
+    createdAt: integer('created_at').notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.roundId, table.playerId] })],
 );

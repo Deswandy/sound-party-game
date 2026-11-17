@@ -7,6 +7,9 @@ import type {
   LobbyPlayer,
   LobbyState,
   GamePhase,
+  RoundClip,
+  RoundResult,
+  ScoreEntry,
 } from '../shared/game';
 
 type Bindings = {
@@ -169,18 +172,21 @@ app.get('/api/rooms/:code/state', async (c) => {
     playerId = player.id;
   }
   const rows = await c.env.DB.prepare(
-    'SELECT id, display_name FROM players WHERE room_id = ? AND active = 1 ORDER BY joined_at, id',
+    'SELECT id, display_name, ready FROM players WHERE room_id = ? AND active = 1 ORDER BY joined_at, id',
   )
     .bind(room!.id)
-    .all<{ id: string; display_name: string }>();
+    .all<{ id: string; display_name: string; ready: number }>();
   const players: LobbyPlayer[] = rows.results.map((row) => ({
     id: row.id,
     name: row.display_name,
+    ready: row.ready === 1,
   }));
   const round = room!.current_round_id
-    ? await c.env.DB.prepare('SELECT prompt FROM rounds WHERE id = ? AND room_id = ?')
+    ? await c.env.DB.prepare(
+        'SELECT prompt, playback_index FROM rounds WHERE id = ? AND room_id = ?',
+      )
         .bind(room!.current_round_id, room!.id)
-        .first<{ prompt: string }>()
+        .first<{ prompt: string; playback_index: number }>()
     : null;
   const submitted = room!.current_round_id
     ? await c.env.DB.prepare(
@@ -198,6 +204,61 @@ app.get('/api/rooms/:code/state', async (c) => {
           .bind(room!.current_round_id, playerId)
           .first<{ id: string }>()
       : null;
+  const roundCount = await c.env.DB.prepare(
+    'SELECT COUNT(*) AS count FROM rounds WHERE room_id = ?',
+  )
+    .bind(room!.id)
+    .first<{ count: number }>();
+  const clipRows =
+    room!.current_round_id && ['playback', 'voting', 'results'].includes(room!.phase)
+      ? await c.env.DB.prepare(
+          "SELECT id, player_id, storage_key FROM clips WHERE round_id = ? AND status = 'submitted' ORDER BY submitted_at, id",
+        )
+          .bind(room!.current_round_id)
+          .all<{ id: string; player_id: string; storage_key: string }>()
+      : null;
+  const clips: RoundClip[] = (clipRows?.results ?? []).map((clip, index) => ({
+    id: clip.id,
+    number: index + 1,
+  }));
+  const voteRows =
+    room!.current_round_id && ['voting', 'results'].includes(room!.phase)
+      ? await c.env.DB.prepare('SELECT player_id, clip_id FROM votes WHERE round_id = ?')
+          .bind(room!.current_round_id)
+          .all<{ player_id: string; clip_id: string }>()
+      : null;
+  const counts = new Map<string, number>();
+  for (const vote of voteRows?.results ?? [])
+    counts.set(vote.clip_id, (counts.get(vote.clip_id) ?? 0) + 1);
+  const nameById = new Map(players.map((player) => [player.id, player.name]));
+  const results: RoundResult[] =
+    room!.phase === 'results'
+      ? (clipRows?.results ?? [])
+          .map((clip, index) => ({
+            id: clip.id,
+            number: index + 1,
+            playerId: clip.player_id,
+            name: nameById.get(clip.player_id) ?? 'Former player',
+            votes: counts.get(clip.id) ?? 0,
+          }))
+          .sort((a, b) => b.votes - a.votes || a.number - b.number)
+      : [];
+  const scoreRows =
+    room!.phase === 'results'
+      ? await c.env.DB.prepare(
+          `SELECT players.id, players.display_name, COUNT(votes.clip_id) AS votes
+         FROM players LEFT JOIN clips ON clips.player_id = players.id
+         LEFT JOIN votes ON votes.clip_id = clips.id
+         WHERE players.room_id = ? GROUP BY players.id ORDER BY votes DESC, players.joined_at`,
+        )
+          .bind(room!.id)
+          .all<{ id: string; display_name: string; votes: number }>()
+      : null;
+  const scores: ScoreEntry[] = (scoreRows?.results ?? []).map((row) => ({
+    playerId: row.id,
+    name: row.display_name,
+    votes: row.votes,
+  }));
   return c.json<LobbyState>({
     code: room!.code,
     phase: room!.phase as GamePhase,
@@ -208,7 +269,34 @@ app.get('/api/rooms/:code/state', async (c) => {
     prompt: round?.prompt ?? null,
     submissionCount: submitted?.count ?? 0,
     mySubmitted: Boolean(mine),
+    roundNumber: roundCount?.count ?? 0,
+    playbackIndex: round?.playback_index ?? -1,
+    clips,
+    myClipId: clipRows?.results.find((clip) => clip.player_id === playerId)?.id ?? null,
+    myVoteClipId: voteRows?.results.find((vote) => vote.player_id === playerId)?.clip_id ?? null,
+    voteCount: voteRows?.results.length ?? 0,
+    results,
+    scores,
   });
+});
+
+app.post('/api/rooms/:code/ready', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (room!.phase !== 'lobby') return c.json({ error: 'The round has started' }, 409);
+  const secret = bearer(c.req.header('authorization'));
+  if (!secret) return c.json({ error: 'Player access required' }, 401);
+  const body = await c.req.json<{ ready?: unknown }>().catch(() => null);
+  if (typeof body?.ready !== 'boolean')
+    return c.json({ error: 'Ready must be true or false' }, 400);
+  const result = await c.env.DB.prepare(
+    'UPDATE players SET ready = ? WHERE room_id = ? AND session_secret_hash = ? AND active = 1',
+  )
+    .bind(body.ready ? 1 : 0, room!.id, await hash(secret))
+    .run();
+  if (result.meta.changes !== 1) return c.json({ error: 'Player access required' }, 401);
+  return c.json({ ok: true });
 });
 
 app.post('/api/rooms/:code/rounds', async (c) => {
@@ -218,7 +306,8 @@ app.post('/api/rooms/:code/rounds', async (c) => {
   if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
     return c.json({ error: 'Host access required' }, 403);
   }
-  if (room!.phase !== 'lobby') return c.json({ error: 'Round already started' }, 409);
+  if (!['lobby', 'results'].includes(room!.phase))
+    return c.json({ error: 'Round already started' }, 409);
   const body = await c.req.json<{ prompt?: unknown }>().catch(() => null);
   const prompt = typeof body?.prompt === 'string' ? body.prompt.trim() : '';
   if (prompt.length < 3 || prompt.length > 160 || /[\x00-\x1f\x7f]/.test(prompt)) {
@@ -230,6 +319,10 @@ app.post('/api/rooms/:code/rounds', async (c) => {
     .bind(room!.id)
     .first<{ count: number }>();
   if (!playerCount?.count) return c.json({ error: 'Wait for a player to join' }, 409);
+  const played = await c.env.DB.prepare('SELECT COUNT(*) AS count FROM rounds WHERE room_id = ?')
+    .bind(room!.id)
+    .first<{ count: number }>();
+  if ((played?.count ?? 0) >= 3) return c.json({ error: 'This game has finished' }, 409);
   const roundId = crypto.randomUUID();
   const now = Date.now();
   const results = await c.env.DB.batch([
@@ -237,7 +330,7 @@ app.post('/api/rooms/:code/rounds', async (c) => {
       'INSERT INTO rounds (id, room_id, prompt, created_at) VALUES (?, ?, ?, ?)',
     ).bind(roundId, room!.id, prompt, now),
     c.env.DB.prepare(
-      "UPDATE rooms SET phase = 'recording', current_round_id = ?, last_active_at = ? WHERE id = ? AND phase = 'lobby'",
+      "UPDATE rooms SET phase = 'recording', current_round_id = ?, last_active_at = ? WHERE id = ? AND phase IN ('lobby', 'results')",
     ).bind(roundId, now, room!.id),
   ]);
   if (results[1].meta.changes !== 1) return c.json({ error: 'Round already started' }, 409);
@@ -343,6 +436,210 @@ app.post('/api/rooms/:code/close-recording', async (c) => {
     .bind(Date.now(), room!.id)
     .run();
   if (result.meta.changes !== 1) return c.json({ error: 'Recording is already closed' }, 409);
+  return c.json({ ok: true });
+});
+
+app.get('/api/rooms/:code/clips/:id/audio', async (c) => {
+  if (!c.env.DB || !c.env.BUCKET) return c.json({ error: 'Clip storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  if (!['playback', 'voting', 'results'].includes(room!.phase)) {
+    return c.json({ error: 'Clips are not ready' }, 409);
+  }
+  const clip = await c.env.DB.prepare(
+    "SELECT storage_key, mime_type FROM clips WHERE id = ? AND round_id = ? AND status = 'submitted'",
+  )
+    .bind(c.req.param('id'), room!.current_round_id)
+    .first<{ storage_key: string; mime_type: string }>();
+  if (!clip) return c.json({ error: 'Clip not found' }, 404);
+  const object = await c.env.BUCKET.get(clip.storage_key);
+  if (!object) return c.json({ error: 'Clip not found' }, 404);
+  return new Response(object.body as ReadableStream, {
+    headers: { 'Content-Type': clip.mime_type, 'Cache-Control': 'no-store' },
+  });
+});
+
+app.post('/api/rooms/:code/playback/select', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  if (room!.phase !== 'playback' || !room!.current_round_id) {
+    return c.json({ error: 'Playback is not active' }, 409);
+  }
+  const body = await c.req.json<{ clipId?: unknown }>().catch(() => null);
+  const clips = await c.env.DB.prepare(
+    "SELECT id FROM clips WHERE round_id = ? AND status = 'submitted' ORDER BY submitted_at, id",
+  )
+    .bind(room!.current_round_id)
+    .all<{ id: string }>();
+  const index = clips.results.findIndex((clip) => clip.id === body?.clipId);
+  if (index < 0) return c.json({ error: 'Clip not found' }, 404);
+  const round = await c.env.DB.prepare('SELECT playback_index FROM rounds WHERE id = ?')
+    .bind(room!.current_round_id)
+    .first<{ playback_index: number }>();
+  if (index > (round?.playback_index ?? -1) + 1) {
+    return c.json({ error: 'Play the clips in order' }, 409);
+  }
+  await c.env.DB.prepare('UPDATE rounds SET playback_index = ? WHERE id = ?')
+    .bind(index, room!.current_round_id)
+    .run();
+  return c.json({ playbackIndex: index });
+});
+
+app.post('/api/rooms/:code/open-voting', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  if (room!.phase !== 'playback' || !room!.current_round_id) {
+    return c.json({ error: 'Playback is not active' }, 409);
+  }
+  const count = await c.env.DB.prepare(
+    "SELECT COUNT(*) AS count FROM clips WHERE round_id = ? AND status = 'submitted'",
+  )
+    .bind(room!.current_round_id)
+    .first<{ count: number }>();
+  const round = await c.env.DB.prepare('SELECT playback_index FROM rounds WHERE id = ?')
+    .bind(room!.current_round_id)
+    .first<{ playback_index: number }>();
+  if (!count?.count || (round?.playback_index ?? -1) < count.count - 1) {
+    return c.json({ error: 'Select every clip before voting' }, 409);
+  }
+  await c.env.DB.prepare("UPDATE rooms SET phase = 'voting' WHERE id = ? AND phase = 'playback'")
+    .bind(room!.id)
+    .run();
+  return c.json({ ok: true });
+});
+
+app.post('/api/rooms/:code/votes', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (room!.phase !== 'voting' || !room!.current_round_id) {
+    return c.json({ error: 'Voting is closed' }, 409);
+  }
+  const secret = bearer(c.req.header('authorization'));
+  if (!secret) return c.json({ error: 'Player access required' }, 401);
+  const player = await c.env.DB.prepare(
+    'SELECT id FROM players WHERE room_id = ? AND session_secret_hash = ? AND active = 1',
+  )
+    .bind(room!.id, await hash(secret))
+    .first<{ id: string }>();
+  if (!player) return c.json({ error: 'Player access required' }, 401);
+  const body = await c.req.json<{ clipId?: unknown }>().catch(() => null);
+  const clip =
+    typeof body?.clipId === 'string'
+      ? await c.env.DB.prepare(
+          "SELECT player_id FROM clips WHERE id = ? AND round_id = ? AND status = 'submitted'",
+        )
+          .bind(body.clipId, room!.current_round_id)
+          .first<{ player_id: string }>()
+      : null;
+  if (!clip) return c.json({ error: 'Clip not found' }, 404);
+  if (clip.player_id === player.id)
+    return c.json({ error: 'You cannot vote for your own clip' }, 409);
+  let result;
+  try {
+    result = await c.env.DB.prepare(
+      `INSERT INTO votes (round_id, player_id, clip_id, created_at)
+       SELECT ?, ?, ?, ? FROM rooms WHERE id = ? AND phase = 'voting' AND current_round_id = ?`,
+    )
+      .bind(
+        room!.current_round_id,
+        player.id,
+        body!.clipId,
+        Date.now(),
+        room!.id,
+        room!.current_round_id,
+      )
+      .run();
+  } catch (error) {
+    if (String(error).includes('UNIQUE constraint failed'))
+      return c.json({ error: 'You already voted' }, 409);
+    throw error;
+  }
+  if (result.meta.changes !== 1) return c.json({ error: 'Voting is closed' }, 409);
+  return c.json({ ok: true }, 201);
+});
+
+app.post('/api/rooms/:code/reveal', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  if (room!.phase !== 'voting' || !room!.current_round_id) {
+    return c.json({ error: 'Voting is not active' }, 409);
+  }
+  await c.env.DB.batch([
+    c.env.DB.prepare("UPDATE rooms SET phase = 'results' WHERE id = ? AND phase = 'voting'").bind(
+      room!.id,
+    ),
+    c.env.DB.prepare('UPDATE rounds SET ended_at = ? WHERE id = ?').bind(
+      Date.now(),
+      room!.current_round_id,
+    ),
+  ]);
+  return c.json({ ok: true });
+});
+
+app.post('/api/rooms/:code/restart', async (c) => {
+  if (!c.env.DB || !c.env.BUCKET) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  if (room!.phase !== 'results') return c.json({ error: 'Finish the round first' }, 409);
+  const clipRows = await c.env.DB.prepare(
+    'SELECT clips.storage_key FROM clips JOIN rounds ON rounds.id = clips.round_id WHERE rounds.room_id = ?',
+  )
+    .bind(room!.id)
+    .all<{ storage_key: string }>();
+  if (clipRows.results.length)
+    await c.env.BUCKET.delete(clipRows.results.map((clip) => clip.storage_key));
+  await c.env.DB.batch([
+    c.env.DB.prepare(
+      'DELETE FROM votes WHERE round_id IN (SELECT id FROM rounds WHERE room_id = ?)',
+    ).bind(room!.id),
+    c.env.DB.prepare(
+      'DELETE FROM clips WHERE round_id IN (SELECT id FROM rounds WHERE room_id = ?)',
+    ).bind(room!.id),
+    c.env.DB.prepare('DELETE FROM rounds WHERE room_id = ?').bind(room!.id),
+    c.env.DB.prepare('UPDATE players SET ready = 0 WHERE room_id = ?').bind(room!.id),
+    c.env.DB.prepare(
+      "UPDATE rooms SET phase = 'lobby', current_round_id = NULL, last_active_at = ? WHERE id = ?",
+    ).bind(Date.now(), room!.id),
+  ]);
+  return c.json({ ok: true });
+});
+
+app.post('/api/rooms/:code/next-round', async (c) => {
+  if (!c.env.DB) return c.json({ error: 'Game storage is unavailable' }, 503);
+  const room = await getRoom(c.env.DB, c.req.param('code'));
+  if (roomError(room)) return c.json({ error: 'Room not found or expired' }, 404);
+  if (!(await hostAuthorized(room!, c.req.header('authorization')))) {
+    return c.json({ error: 'Host access required' }, 403);
+  }
+  if (room!.phase !== 'results') return c.json({ error: 'Finish the round first' }, 409);
+  const played = await c.env.DB.prepare('SELECT COUNT(*) AS count FROM rounds WHERE room_id = ?')
+    .bind(room!.id)
+    .first<{ count: number }>();
+  if ((played?.count ?? 0) >= 3) return c.json({ error: 'The game is finished' }, 409);
+  await c.env.DB.prepare(
+    "UPDATE rooms SET phase = 'lobby', current_round_id = NULL WHERE id = ? AND phase = 'results'",
+  )
+    .bind(room!.id)
+    .run();
   return c.json({ ok: true });
 });
 

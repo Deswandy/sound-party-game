@@ -3,6 +3,9 @@ import { useEffect, useState } from 'preact/hooks';
 import QRCode from 'qrcode';
 import type { CreateRoomResponse, JoinRoomResponse, LobbyState } from '../shared/game';
 import { Recorder } from './Recorder';
+import { Playback } from './Playback';
+import { MicCheck } from './MicCheck';
+import { ResultScene } from './ResultScene';
 import './style.css';
 
 const isHost = location.pathname === '/host';
@@ -184,6 +187,14 @@ function App() {
             prompt: result.prompt,
             submissionCount: 0,
             mySubmitted: false,
+            roundNumber: current.roundNumber + 1,
+            playbackIndex: -1,
+            clips: [],
+            myClipId: null,
+            myVoteClipId: null,
+            voteCount: 0,
+            results: [],
+            scores: [],
           },
       );
     } catch (cause) {
@@ -199,6 +210,131 @@ function App() {
     try {
       await request(`/api/rooms/${roomCode}/close-recording`, 'POST', undefined, session);
       setLobby((current) => current && { ...current, phase: 'playback' });
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function setReady(ready: boolean) {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/ready`, 'POST', { ready }, session);
+      setLobby(
+        (current) =>
+          current && {
+            ...current,
+            players: current.players.map((player) =>
+              player.id === playerId ? { ...player, ready } : player,
+            ),
+          },
+      );
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function openVoting() {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/open-voting`, 'POST', undefined, session);
+      setLobby((current) => current && { ...current, phase: 'voting' });
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function vote(clipId: string) {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/votes`, 'POST', { clipId }, session);
+      setLobby(
+        (current) =>
+          current && { ...current, myVoteClipId: clipId, voteCount: current.voteCount + 1 },
+      );
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function reveal() {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/reveal`, 'POST', undefined, session);
+      setLobby((current) => current && { ...current, phase: 'results' });
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function restart() {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/restart`, 'POST', undefined, session);
+      setLobby(
+        (current) =>
+          current && {
+            ...current,
+            phase: 'lobby',
+            roundId: null,
+            prompt: null,
+            roundNumber: 0,
+            clips: [],
+            results: [],
+            scores: [],
+            submissionCount: 0,
+            voteCount: 0,
+            playbackIndex: -1,
+            myClipId: null,
+            myVoteClipId: null,
+            mySubmitted: false,
+            players: current.players.map((player) => ({ ...player, ready: false })),
+          },
+      );
+    } catch (cause) {
+      setError((cause as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function nextRound() {
+    setBusy(true);
+    setError('');
+    try {
+      await request(`/api/rooms/${roomCode}/next-round`, 'POST', undefined, session);
+      setLobby(
+        (current) =>
+          current && {
+            ...current,
+            phase: 'lobby',
+            roundId: null,
+            prompt: null,
+            clips: [],
+            results: [],
+            scores: [],
+            submissionCount: 0,
+            voteCount: 0,
+            playbackIndex: -1,
+            myClipId: null,
+            myVoteClipId: null,
+            mySubmitted: false,
+          },
+      );
     } catch (cause) {
       setError((cause as Error).message);
     } finally {
@@ -240,8 +376,14 @@ function App() {
             ? lobby?.phase === 'recording'
               ? 'Record a Sound'
               : lobby?.phase === 'playback'
-                ? 'Recording Closed'
-                : 'Game Lobby'
+                ? 'Listen Together'
+                : lobby?.phase === 'voting'
+                  ? 'Vote for a Sound'
+                  : lobby?.phase === 'results'
+                    ? lobby.roundNumber >= 3
+                      ? 'Final Scores'
+                      : 'Round Results'
+                    : 'Game Lobby'
             : isHost
               ? 'Host Game'
               : 'Join Game'}
@@ -255,7 +397,8 @@ function App() {
               </div>
               {lobby?.phase === 'lobby' && (
                 <p class="count">
-                  {lobby.players.length} / {lobby.maxPlayers} players
+                  {lobby.players.length} / {lobby.maxPlayers} players ·{' '}
+                  {lobby.players.filter((player) => player.ready).length} ready
                 </p>
               )}
               {isHost && lobby?.phase === 'lobby' && (
@@ -282,6 +425,7 @@ function App() {
                         <span>
                           {player.name}
                           {player.id === playerId && !isHost ? ' (you)' : ''}
+                          {player.ready ? ' · Ready' : ''}
                         </span>
                         {isHost && (
                           <button
@@ -298,9 +442,25 @@ function App() {
                 ) : (
                   <p class="waiting">Waiting for players…</p>
                 ))}
+              {!isHost && lobby?.phase === 'lobby' && (
+                <>
+                  <MicCheck />
+                  <button
+                    class="secondary"
+                    disabled={busy}
+                    onClick={() =>
+                      void setReady(!lobby.players.find((player) => player.id === playerId)?.ready)
+                    }
+                  >
+                    {lobby.players.find((player) => player.id === playerId)?.ready
+                      ? 'Not ready'
+                      : 'I’m ready'}
+                  </button>
+                </>
+              )}
               {isHost && lobby?.phase === 'lobby' && (
                 <div class="round-setup">
-                  <h2>Start a round</h2>
+                  <h2>Start round {lobby.roundNumber + 1}</h2>
                   <label htmlFor="prompt">Sound prompt</label>
                   <select
                     id="prompt"
@@ -372,7 +532,118 @@ function App() {
               {lobby?.phase === 'playback' && (
                 <div class="round-active">
                   <p class="prompt">{lobby.prompt}</p>
-                  <p>Recording is closed. Playback and voting are coming in the next build.</p>
+                  {isHost ? (
+                    <Playback
+                      code={roomCode}
+                      token={session}
+                      clips={lobby.clips}
+                      playbackIndex={lobby.playbackIndex}
+                      onSelected={(index) =>
+                        setLobby((current) => current && { ...current, playbackIndex: index })
+                      }
+                      onVoting={() => void openVoting()}
+                    />
+                  ) : (
+                    <p>
+                      {lobby.playbackIndex >= 0
+                        ? `Clip ${lobby.playbackIndex + 1} of ${lobby.clips.length}`
+                        : 'Waiting for the host to play the clips…'}{' '}
+                      Listen through the meeting audio.
+                    </p>
+                  )}
+                </div>
+              )}
+              {lobby?.phase === 'voting' && (
+                <div class="round-active">
+                  <p class="prompt">{lobby.prompt}</p>
+                  {isHost ? (
+                    <>
+                      <p class="count">
+                        {lobby.voteCount} of {lobby.players.length} voted
+                      </p>
+                      <button disabled={busy} onClick={() => void reveal()}>
+                        {busy ? 'Revealing…' : 'Reveal results'}
+                      </button>
+                    </>
+                  ) : lobby.myVoteClipId ? (
+                    <p class="submitted">Vote submitted. Waiting for the reveal.</p>
+                  ) : (
+                    <>
+                      <p>Choose your favorite clip. You get one vote.</p>
+                      <div class="clip-grid">
+                        {lobby.clips.map((clip) => (
+                          <button
+                            key={clip.id}
+                            class="clip"
+                            disabled={busy || clip.id === lobby.myClipId}
+                            onClick={() => void vote(clip.id)}
+                          >
+                            Clip {clip.number}
+                            {clip.id === lobby.myClipId ? ' · Yours' : ''}
+                          </button>
+                        ))}
+                      </div>
+                      {lobby.clips.length < 2 && (
+                        <p>There is no other clip to vote for this round.</p>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+              {lobby?.phase === 'results' && (
+                <div class="round-active">
+                  <p class="count">Round {lobby.roundNumber} of 3</p>
+                  <p class="prompt">{lobby.prompt}</p>
+                  {lobby.results.length ? (
+                    <>
+                      <ResultScene
+                        code={roomCode}
+                        token={session}
+                        results={lobby.results}
+                        prompt={lobby.prompt}
+                        isHost={isHost}
+                      />
+                      <h2>
+                        {lobby.results.filter((result) => result.votes === lobby.results[0].votes)
+                          .length > 1
+                          ? 'Tied winners'
+                          : 'Winner'}
+                      </h2>
+                      <ul class="results">
+                        {lobby.results.map((result) => (
+                          <li key={result.id}>
+                            <span>
+                              Clip {result.number} · {result.name}
+                            </span>
+                            <strong>
+                              {result.votes} {result.votes === 1 ? 'vote' : 'votes'}
+                            </strong>
+                          </li>
+                        ))}
+                      </ul>
+                      <h2>Overall scores</h2>
+                      <ul class="results">
+                        {lobby.scores.map((score) => (
+                          <li key={score.playerId}>
+                            <span>{score.name}</span>
+                            <strong>{score.votes}</strong>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <p>Counting votes…</p>
+                  )}
+                  {isHost && lobby.roundNumber < 3 && (
+                    <button disabled={busy} onClick={() => void nextRound()}>
+                      {busy ? 'Continuing…' : 'Continue to next round'}
+                    </button>
+                  )}
+                  {isHost && lobby.roundNumber >= 3 && (
+                    <button disabled={busy} onClick={() => void restart()}>
+                      {busy ? 'Restarting…' : 'Play again with same players'}
+                    </button>
+                  )}
                 </div>
               )}
               {lobby?.phase === 'lobby' && (

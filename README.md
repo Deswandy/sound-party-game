@@ -2,7 +2,7 @@
 
 A browser game for online meetings with up to 20 active players. The host shares the game screen and audio; players join from a phone or computer, enter a display name, record short sound effects, and vote for their favorite clip. No accounts are required.
 
-The implementation uses TypeScript with Preact and Vite for the browser interfaces, Hono for the API, and Cloudflare D1 and R2 for temporary game data and audio. Hosts can create a room and share a code, link, or QR code. Up to 20 players can join by name and return from the same browser. The host can start a sound prompt; players can record, preview, and replace a clip up to 30 seconds long. Playback and voting come in later tickets.
+The implementation uses TypeScript with Preact and Vite for the browser interfaces, Hono for the API, and Cloudflare D1 and R2 for temporary game data and audio. Hosts can create a room and share a code, link, or QR code. Up to 20 players can join by name and return from the same browser. Players can warm up their microphone, record and replace a clip up to 30 seconds long, listen through the host's shared audio, and vote once. The host controls three rounds, reveals winners and scores, and can replay with the same players.
 
 ## Development
 
@@ -13,6 +13,7 @@ Run `npm run format` to format source files with Oxfmt, or `npm run format:check
 Database migrations are generated from `db/schema.ts` with `npm run db:generate` and stored in `drizzle/`. Apply them before serving the Worker. For a local end-to-end check, run `npm run build`, `npx wrangler d1 migrations apply foley-local --local`, then `npx wrangler dev --local --port 8787`. The checked-in `wrangler.jsonc` binds local D1 and R2 resources.
 
 With the local Worker running, `npm run test:recording` checks prompt authorization, clip replacement, the 30-second upload limit, submission counts, and late-upload rejection.
+`npm run test:game-loop` checks the full three-round flow, including anonymous audio access, voting rules, ties, scores, and replay.
 
 ## Plans
 

@@ -12,7 +12,10 @@ export type RoomState = {
 
 export type HealthResponse = { status: 'ok'; service: 'sound-party-game' };
 
-export type LobbyPlayer = { id: string; name: string };
+export type LobbyPlayer = { id: string; name: string; ready: boolean };
+export type RoundClip = { id: string; number: number };
+export type RoundResult = RoundClip & { playerId: string; name: string; votes: number };
+export type ScoreEntry = { playerId: string; name: string; votes: number };
 
 export type LobbyState = {
   code: string;
@@ -24,6 +27,14 @@ export type LobbyState = {
   prompt: string | null;
   submissionCount: number;
   mySubmitted: boolean;
+  roundNumber: number;
+  playbackIndex: number;
+  clips: RoundClip[];
+  myClipId: string | null;
+  myVoteClipId: string | null;
+  voteCount: number;
+  results: RoundResult[];
+  scores: ScoreEntry[];
 };
 
 export type CreateRoomResponse = { code: string; hostToken: string };
