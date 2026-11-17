@@ -8,7 +8,7 @@ const bundled = await build({
   format: 'esm',
   write: false,
 });
-const { HEARSAY_SCENES, planHearSayRound, matchupPoints } = await import(
+const { HEARSAY_SCENES, planHearSayRound, matchupPoints, rankMatchup } = await import(
   `data:text/javascript;base64,${Buffer.from(bundled.outputFiles[0].contents).toString('base64')}`
 );
 
@@ -17,6 +17,12 @@ assert.equal(new Set(HEARSAY_SCENES.map((scene) => scene.video)).size, 96);
 for (const scene of HEARSAY_SCENES) {
   assert.equal(scene.slots.length, scene.appearance === 'LATE' ? 3 : 1);
   for (const slot of scene.slots) assert.ok(slot.durationMs >= 2000 && slot.durationMs <= 7300);
+  assert.ok(scene.timeline.durationMs >= 3000);
+  for (let slot = 0; slot < scene.slots.length; slot++) {
+    assert.ok(scene.timeline.markers.some((marker) => marker.name === `Prompt${slot}On`));
+    assert.ok(scene.timeline.markers.some((marker) => marker.name === `Prompt${slot}Off`));
+    assert.ok(scene.timeline.soundStarts.some((sound) => sound.name === `Prompt${slot}`));
+  }
 }
 
 for (let playerCount = 2; playerCount <= 20; playerCount++) {
@@ -48,4 +54,14 @@ for (let playerCount = 2; playerCount <= 20; playerCount++) {
 
 assert.deepEqual(matchupPoints([3, 1]), [1100, 400]);
 assert.deepEqual(matchupPoints([0, 0]), [0, 0]);
+const ranked = rankMatchup([
+  { playerId: 'a', votes: 2, likes: 1, priorVideoAppearances: 2 },
+  { playerId: 'b', votes: 2, likes: 0, priorVideoAppearances: 1 },
+  { playerId: 'c', votes: 0, likes: 2, priorVideoAppearances: 0 },
+]);
+assert.equal(ranked.winner.playerId, 'b');
+assert.equal(ranked.runnerUp.playerId, 'a');
+assert.equal(ranked.points.get('a'), 820);
+assert.equal(ranked.points.get('b'), 800);
+assert.equal(ranked.points.get('c'), 40);
 console.log('Hear Say content, assignments, and point allocation passed for 2–20 players');

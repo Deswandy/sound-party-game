@@ -3,14 +3,16 @@ import { basename, join } from 'node:path';
 
 const source = process.argv[2];
 const videos = process.argv[3];
+const timelinesPath = process.argv[4];
 if (!source || !videos) {
   throw new Error(
-    'Usage: node scripts/prepare-hearsay-content.mjs <MicGame/content/en> <converted-video-directory>',
+    'Usage: node scripts/prepare-hearsay-content.mjs <MicGame/content/en> <converted-video-directory> [event-timelines.json]',
   );
 }
 
 const prompts = JSON.parse(await readFile(join(source, 'MicGamePrompt.jet'), 'utf8')).content;
 const scenes = JSON.parse(await readFile(join(source, 'MicGameVideo.jet'), 'utf8')).content;
+const timelines = timelinesPath ? JSON.parse(await readFile(timelinesPath, 'utf8')) : {};
 const converted = new Map(
   (await readdir(videos))
     .filter((name) => name.endsWith('.mp4'))
@@ -32,7 +34,9 @@ const content = prompts.map((entry) => {
     title: entry.videoTitle,
     description: scene.textDescription,
     video,
+    audio: `${basename(video, '.mp4')}.m4a`,
     backingTrack: scene.backingTrack,
+    timeline: timelines[scene.backingTrack] ?? null,
     slots: entry.soundsToRecord.map((sound, index) => ({
       prompt: sound.prompt,
       direction: sound.direction ?? null,

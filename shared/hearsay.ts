@@ -8,7 +8,13 @@ export type Scene = {
   title: string;
   description: string;
   video: string;
+  audio: string;
   backingTrack: string;
+  timeline: {
+    durationMs: number;
+    markers: { name: string; positionMs: number }[];
+    soundStarts: { name: string; positionMs: number }[];
+  } | null;
   slots: SoundSlot[];
 };
 export type SoundAssignment = {
@@ -211,4 +217,41 @@ export function planHearSayRound(
 export function matchupPoints(votes: number[], pointPool = 1500): number[] {
   const total = votes.reduce((sum, count) => sum + count, 0);
   return votes.map((count) => (total ? Math.round((pointPool * count) / total / 100) * 100 : 0));
+}
+
+export type MatchupStanding = {
+  playerId: string;
+  votes: number;
+  likes: number;
+  priorVideoAppearances: number;
+};
+
+export function rankMatchup(standings: MatchupStanding[]): {
+  winner: MatchupStanding;
+  runnerUp: MatchupStanding | null;
+  points: Map<string, number>;
+} {
+  if (!standings.length) throw new Error('A matchup needs recordings');
+  const ranked = [...standings].sort(
+    (a, b) => b.votes - a.votes || a.priorVideoAppearances - b.priorVideoAppearances,
+  );
+  const [winner] = ranked;
+  const runnerUp =
+    ranked
+      .slice(1)
+      .filter((entry) => entry.votes > 0 || entry.likes > 0)
+      .sort(
+        (a, b) =>
+          b.votes - a.votes ||
+          a.priorVideoAppearances - b.priorVideoAppearances ||
+          b.likes - a.likes,
+      )[0] ?? null;
+  const awards = matchupPoints(standings.map((entry) => entry.votes));
+  return {
+    winner,
+    runnerUp,
+    points: new Map(
+      standings.map((entry, index) => [entry.playerId, awards[index] + entry.likes * 20]),
+    ),
+  };
 }

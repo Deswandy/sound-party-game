@@ -53,5 +53,6 @@ This records the observed behaviour and configuration needed to replace Foley Fo
 
 - The local game contains 96 `.usm` videos totaling about 1.45 GB, plus five FMOD audio banks totaling about 80 MB. All 96 videos converted to browser-playable MP4, totaling 80.4 MB. The converted files are currently in ignored `work/hearsay-media/video`.
 - `content/hearsay/scenes.json` maps all 137 prompt-scene combinations to the 96 converted videos and their exact slot durations. This includes 53 early, 61 middle, and 23 late prompts. Late prompts have three slots.
-- The FMOD banks can be decoded into individual audio tracks. The `backingTrack` paths in the scene metadata are FMOD events; mapping those events to tracks and timing needs further work before the videos have complete original audio.
+- The FMOD banks can be decoded into individual audio tracks. The original FMOD runtime reveals the length and `PromptNOn` / `PromptNOff` timeline markers for all 96 scene events. These cues are now in `content/hearsay/scenes.json`; mapping each event's audio mix and exact recorded-sound trigger still needs work.
 - Large binary assets need a delivery path that works for the deployed browser game. The current Worker build embeds text assets, so it cannot serve the 80 MB video set as is.
+- All 96 converted MP4s are uploaded to a draft GitHub release tagged `hearsay-media-v1`. It is not yet public or used by the live game.
