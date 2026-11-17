@@ -1,0 +1,2424 @@
+[
+  {
+    "id": "109434",
+    "appearance": "EARLY",
+    "videoId": "109433",
+    "title": "Grave Dig - Hot Food",
+    "description": "A man shovels dirt into a hole, burying something.",
+    "video": "graveDig.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GraveDig",
+    "slots": [
+      {
+        "prompt": "the sound of biting into something that’s too hot",
+        "direction": "don’t use words!",
+        "durationMs": 4667
+      }
+    ]
+  },
+  {
+    "id": "109435",
+    "appearance": "EARLY",
+    "videoId": "109433",
+    "title": "Grave Dig - Hangover",
+    "description": "A man shovels dirt into a hole, burying something.",
+    "video": "graveDig.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GraveDig",
+    "slots": [
+      {
+        "prompt": "what a hangover sounds like",
+        "direction": "don’t use words!",
+        "durationMs": 4667
+      }
+    ]
+  },
+  {
+    "id": "109436",
+    "appearance": "EARLY",
+    "videoId": "109174",
+    "title": "Drone Attack - Sneeze",
+    "description": "A drone chases a man down a road.",
+    "video": "droneAttack.mp4",
+    "backingTrack": "VIDEO/singlePrompt/DroneAttack",
+    "slots": [
+      {
+        "prompt": "the sound of a sneeze that never comes",
+        "direction": "don’t use words!",
+        "durationMs": 4501
+      }
+    ]
+  },
+  {
+    "id": "109605",
+    "appearance": "MID-GAME",
+    "videoId": "109601",
+    "title": "Megaphone On Cliff - Unpopular Opinion",
+    "description": "A man on a cliff shouts into a megaphone.",
+    "video": "megaphoneOnCliff.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MegaphoneOnCliff",
+    "slots": [
+      {
+        "prompt": "shout an unpopular opinion!",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "109606",
+    "appearance": "MID-GAME",
+    "videoId": "109602",
+    "title": "Unity Hands - Favorite Dessert",
+    "description": "A group of people puts their hands together in a huddle.",
+    "video": "unityHands.mp4",
+    "backingTrack": "VIDEO/singlePrompt/UnityHands",
+    "slots": [
+      {
+        "prompt": "shout your favorite dessert",
+        "direction": "",
+        "durationMs": 2267
+      }
+    ]
+  },
+  {
+    "id": "109608",
+    "appearance": "LATE",
+    "videoId": "112722",
+    "title": "Cliff Jumping - Final Round",
+    "description": "Two paragliders jump off a cliff. One person stays on the cliff watching. One paraglider soars over mountains.",
+    "video": "cliffjumpingv3.mp4",
+    "backingTrack": "VIDEO/threePrompt/CliffJumping",
+    "slots": [
+      {
+        "prompt": "the sound Mario makes when he dies",
+        "direction": "don’t use words!",
+        "durationMs": 2700
+      },
+      {
+        "prompt": "the sound you make when going down a big slide",
+        "direction": "don’t use words!",
+        "durationMs": 2500
+      },
+      {
+        "prompt": "gleefully tell someone that they can’t catch you",
+        "direction": "",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "109613",
+    "appearance": "EARLY",
+    "videoId": "109609",
+    "title": "Corn On The Cob - Good Massage",
+    "description": "A fork spreads butter across corn on the cob.",
+    "video": "cornOnTheCob.mp4",
+    "backingTrack": "VIDEO/singlePrompt/CornOnTheCob",
+    "slots": [
+      {
+        "prompt": "sounds you’d make during a good massage",
+        "direction": "",
+        "durationMs": 6000
+      }
+    ]
+  },
+  {
+    "id": "109614",
+    "appearance": "MID-GAME",
+    "videoId": "109610",
+    "title": "Christmas Wish - Conspiracy Theory",
+    "description": "A little girl whispers into Santa’s ear.",
+    "video": "christmasWish.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ChristmasWish",
+    "slots": [
+      {
+        "prompt": "explain a conspiracy theory you believe very quietly",
+        "direction": null,
+        "durationMs": 7234
+      }
+    ]
+  },
+  {
+    "id": "109616",
+    "appearance": "EARLY",
+    "videoId": "109612",
+    "title": "Elderly Radio - Robot Music",
+    "description": "An elderly woman holds a radio up to her ear.",
+    "video": "elderlyRadio.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ElderlyRadio",
+    "slots": [
+      {
+        "prompt": "music that a robot would love",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "109779",
+    "appearance": "EARLY",
+    "videoId": "109612",
+    "title": "Elderly Radio - Techno",
+    "description": "An elderly woman holds a radio up to her ear.",
+    "video": "elderlyRadio.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ElderlyRadio",
+    "slots": [
+      {
+        "prompt": "give us your best techno impression",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "109800",
+    "appearance": "MID-GAME",
+    "videoId": "109799",
+    "title": "Cheers - Actor",
+    "description": "Friends clink beers and wine glasses in cheers.",
+    "video": "cheers.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Cheers",
+    "slots": [
+      {
+        "prompt": "exclaim the name of a beloved actor",
+        "direction": "",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "109801",
+    "appearance": "MID-GAME",
+    "videoId": "109798",
+    "title": "Doctor Diagnosis - Band",
+    "description": "A doctor speaks and gently pats an elderly patient’s shoulder.",
+    "video": "doctorDiagnosis.mp4",
+    "backingTrack": "VIDEO/singlePrompt/DoctorDiagnosis",
+    "slots": [
+      {
+        "prompt": "gently kick someone out of your band",
+        "direction": "",
+        "durationMs": 6000
+      }
+    ]
+  },
+  {
+    "id": "109803",
+    "appearance": "EARLY",
+    "videoId": "109796",
+    "title": "Parade Band - 20th Century Fox",
+    "description": "A man watches a marching band from his window.",
+    "video": "paradeBand.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ParadeBand",
+    "slots": [
+      {
+        "prompt": "the 20th century fox theme song",
+        "direction": "don’t use words!",
+        "durationMs": 6300
+      }
+    ]
+  },
+  {
+    "id": "109819",
+    "appearance": "EARLY",
+    "videoId": "112693",
+    "title": "Tennis Court - Hot Stove",
+    "description": "A bird’s-eye view of two people playing tennis.",
+    "video": "tennisCourt.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TennisCourt",
+    "slots": [
+      {
+        "prompt": "the sound you make when you touch a hot stove",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "109820",
+    "appearance": "MID-GAME",
+    "videoId": "109790",
+    "title": "Concert Crowd - Condition",
+    "description": "A concert crowd jumps and cheers during a performance.",
+    "video": "concertCrowd.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ConcertCrowd",
+    "slots": [
+      {
+        "prompt": "chant an unfortunate condition",
+        "direction": "",
+        "durationMs": 5801
+      }
+    ]
+  },
+  {
+    "id": "109821",
+    "appearance": "MID-GAME",
+    "videoId": "109789",
+    "title": "No Comment - Defend",
+    "description": "A man in a suit pushes journalists’ microphones away.",
+    "video": "noComment.mp4",
+    "backingTrack": "VIDEO/singlePrompt/NoComment",
+    "slots": [
+      {
+        "prompt": "defend yourself from a silly allegation",
+        "direction": "",
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "109823",
+    "appearance": "EARLY",
+    "videoId": "109787",
+    "title": "Woman Jamming - Miss Piggy",
+    "description": "A woman wearing headphones dances to music.",
+    "video": "womanJamming.mp4",
+    "backingTrack": "VIDEO/singlePrompt/WomanJamming",
+    "slots": [
+      {
+        "prompt": "Miss Piggy doing vocal warm-ups",
+        "direction": "",
+        "durationMs": 6434
+      }
+    ]
+  },
+  {
+    "id": "109827",
+    "appearance": "MID-GAME",
+    "videoId": "109785",
+    "title": "Sky Diving Man - Pool",
+    "description": "A skydiver jumps out of a plane.",
+    "video": "skydivingMan.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SkydivingMan",
+    "slots": [
+      {
+        "prompt": "something you’d yell before jumping into a pool",
+        "direction": "",
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "109926",
+    "appearance": "EARLY",
+    "videoId": "109784",
+    "title": "Techno DJ - Heart Monitor",
+    "description": "A dancing DJ twists knobs on their soundboard.",
+    "video": "technoDj.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TechnoDj",
+    "slots": [
+      {
+        "prompt": "the sound of an erratic heart rate monitor",
+        "direction": "",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "109927",
+    "appearance": "EARLY",
+    "videoId": "109784",
+    "title": "Techno DJ - Enraged Goose",
+    "description": "A dancing DJ twists knobs on their soundboard.",
+    "video": "technoDj.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TechnoDj",
+    "slots": [
+      {
+        "prompt": "the sound of an enraged goose",
+        "direction": "",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "110119",
+    "appearance": "MID-GAME",
+    "videoId": "110099",
+    "title": "Unboxing - Pull String Toy",
+    "description": "A man opens a box and grabs what’s inside.",
+    "video": "unboxing.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Unboxing",
+    "slots": [
+      {
+        "prompt": "something a pull-string toy might say",
+        "direction": "",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "111233",
+    "appearance": "MID-GAME",
+    "videoId": "109788",
+    "title": "Voicemail Message - Break Up",
+    "description": "An answering machine plays.",
+    "video": "voicemailMessage.mp4",
+    "backingTrack": "VIDEO/singlePrompt/VoicemailMessage",
+    "slots": [
+      {
+        "prompt": "break up with someone as fast as possible but still be nice",
+        "direction": "",
+        "durationMs": 5250
+      }
+    ]
+  },
+  {
+    "id": "111236",
+    "appearance": "MID-GAME",
+    "videoId": "109790",
+    "title": "Concert Crowd - Battle Cry",
+    "description": "A concert crowd jumps and cheers during a performance.",
+    "video": "concertCrowd.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ConcertCrowd",
+    "slots": [
+      {
+        "prompt": "a wacky battle cry",
+        "direction": "",
+        "durationMs": 5801
+      }
+    ]
+  },
+  {
+    "id": "111238",
+    "appearance": "EARLY",
+    "videoId": "112693",
+    "title": "Tennis Court - Phone On Face",
+    "description": "A bird’s-eye view of two people playing tennis.",
+    "video": "tennisCourt.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TennisCourt",
+    "slots": [
+      {
+        "prompt": "what dropping your phone on your face sounds like",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "111250",
+    "appearance": "EARLY",
+    "videoId": "109796",
+    "title": "Parade Band - Mozart",
+    "description": "A man watches a marching band from his window.",
+    "video": "paradeBand.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ParadeBand",
+    "slots": [
+      {
+        "prompt": "your impression of one of Mozart’s dumb little symphonies",
+        "direction": "don’t use words!",
+        "durationMs": 6300
+      }
+    ]
+  },
+  {
+    "id": "111251",
+    "appearance": "MID-GAME",
+    "videoId": "111206",
+    "title": "Music Box - Rap Lullaby",
+    "description": "An open music box containing married figurines plays a melody.",
+    "video": "musicBox.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MusicBox",
+    "slots": [
+      {
+        "prompt": "repurpose a rap song as a lullaby",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "111252",
+    "appearance": "MID-GAME",
+    "videoId": "111206",
+    "title": "Music Box - Helium Song",
+    "description": "An open music box containing married figurines plays a melody.",
+    "video": "musicBox.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MusicBox",
+    "slots": [
+      {
+        "prompt": "singing after you just inhaled a lot of helium",
+        "direction": "",
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "111258",
+    "appearance": "MID-GAME",
+    "videoId": "111213",
+    "title": "Big Protest - Clothing Trend",
+    "description": "A group of people march and chant in protest.",
+    "video": "bigProtest.mp4",
+    "backingTrack": "VIDEO/singlePrompt/BigProtest",
+    "slots": [
+      {
+        "prompt": "chant the name of a clothing trend you truly hate",
+        "direction": "",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "111260",
+    "appearance": "MID-GAME",
+    "videoId": "109795",
+    "title": "Carolers - Child Song",
+    "description": "A woman opens her door to carolers, then closes it.",
+    "video": "carolers.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Carolers",
+    "slots": [
+      {
+        "prompt": "sing a song you weren’t allowed to sing as a child",
+        "direction": "",
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "111510",
+    "appearance": "MID-GAME",
+    "videoId": "111324",
+    "title": "Witness - Party",
+    "description": "A silhouetted man is interviewed in a dark room.",
+    "video": "witnessProtection.mp4",
+    "backingTrack": "VIDEO/singlePrompt/WitnessProtection",
+    "slots": [
+      {
+        "prompt": "reminisce about a crazy party you went to",
+        "direction": "",
+        "durationMs": 6000
+      }
+    ]
+  },
+  {
+    "id": "111513",
+    "appearance": "MID-GAME",
+    "videoId": "111317",
+    "title": "Loudspeakers - House Rule",
+    "description": "An old loudspeaker system blares in a parking lot.",
+    "video": "loudspeakers.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Loudspeakers",
+    "slots": [
+      {
+        "prompt": "announce a rule all your houseguests MUST follow",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "111571",
+    "appearance": "EARLY",
+    "videoId": "111326",
+    "title": "Tortoise Fight - Laser Beam",
+    "description": "Two tortoises angrily bare their mouths at each other.",
+    "video": "tortoiseFight.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TortoiseFight",
+    "slots": [
+      {
+        "prompt": "charge up a laser beam that’s gonna shoot out ya mouth",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "111597",
+    "appearance": "MID-GAME",
+    "videoId": "111322",
+    "title": "Clown Typing - Google History",
+    "description": "A clown types on a laptop and raises an eyebrow.",
+    "video": "clownTyping.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ClownTyping",
+    "slots": [
+      {
+        "prompt": "some things that might appear in an 8-year-old’s search history",
+        "direction": "",
+        "durationMs": 6000
+      }
+    ]
+  },
+  {
+    "id": "111645",
+    "appearance": "EARLY",
+    "videoId": "111320",
+    "title": "Volume Down - Mariah Carey",
+    "description": "A driver turns down the radio’s volume.",
+    "video": "volumeDown.mp4",
+    "backingTrack": "VIDEO/singlePrompt/VolumeDown",
+    "slots": [
+      {
+        "prompt": "a Mariah Carey-like vocal run",
+        "direction": "",
+        "durationMs": 4800
+      }
+    ]
+  },
+  {
+    "id": "111999",
+    "appearance": "LATE",
+    "videoId": "111756",
+    "title": "Romantic Night - Final Round",
+    "description": "A hand lights a candle with a match. Someone starts a record player. A smiling man leads his blindfolded date. The man seductively spoons fruit into his date’s mouth. A record spins on a turntable. The couple dances together romantically.",
+    "video": "romanticNight.mp4",
+    "backingTrack": "VIDEO/threePrompt/RomanticNight",
+    "slots": [
+      {
+        "prompt": "your best impression of an R&B song",
+        "direction": null,
+        "durationMs": 5500
+      },
+      {
+        "prompt": "the sound of taking a bite of a big marshmallow",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      },
+      {
+        "prompt": "something you wouldn’t want your crush to say",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "112033",
+    "appearance": "EARLY",
+    "videoId": "111810",
+    "title": "Elk Bugling - Annoying Laugh",
+    "description": "An elk bugles in the wilderness.",
+    "video": "elkBugling.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ElkBugling",
+    "slots": [
+      {
+        "prompt": "a super annoying laugh",
+        "direction": "don’t use words!",
+        "durationMs": 3300
+      }
+    ]
+  },
+  {
+    "id": "112035",
+    "appearance": "EARLY",
+    "videoId": "111801",
+    "title": "Blow Drying Hair - Open Wide",
+    "description": "A woman blows dry her hair in the bathroom.",
+    "video": "blowdryingHair.mp4",
+    "backingTrack": "VIDEO/singlePrompt/BlowdryingHair",
+    "slots": [
+      {
+        "prompt": "open wide for the dentist",
+        "direction": null,
+        "durationMs": 4200
+      }
+    ]
+  },
+  {
+    "id": "112036",
+    "appearance": "EARLY",
+    "videoId": "111803",
+    "title": "Digital Finger - Dial Up",
+    "description": "A futuristic AI computer scans a finger.",
+    "video": "digitalFinger.mp4",
+    "backingTrack": "VIDEO/singlePrompt/DigitalFinger",
+    "slots": [
+      {
+        "prompt": "the sound of dial-up internet",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "112037",
+    "appearance": "EARLY",
+    "videoId": "111804",
+    "title": "Noisemaker Family - Inception",
+    "description": "A family celebrating a birthday blows on noisemakers.",
+    "video": "noiseMakerFamily.mp4",
+    "backingTrack": "VIDEO/singlePrompt/NoiseMakerFamily",
+    "slots": [
+      {
+        "prompt": "the [i]Inception[/i] BWAMMMM",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112039",
+    "appearance": "EARLY",
+    "videoId": "111814",
+    "title": "Honking Horn - Sucker Punch",
+    "description": "An angry woman honks her horn in traffic.",
+    "video": "honkingHorn.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HonkingHorn",
+    "slots": [
+      {
+        "prompt": "the sound of being sucker-punched in the gut",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "112043",
+    "appearance": "EARLY",
+    "videoId": "111803",
+    "title": "Digital Finger - Kid Lasers",
+    "description": "A futuristic AI computer scans a finger.",
+    "video": "digitalFinger.mp4",
+    "backingTrack": "VIDEO/singlePrompt/DigitalFinger",
+    "slots": [
+      {
+        "prompt": "a little kid making laser beam noises",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "112046",
+    "appearance": "MID-GAME",
+    "videoId": "111812",
+    "title": "Two Fencers - Apology",
+    "description": "Two fencers spar.",
+    "video": "twoFencers.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TwoFencers",
+    "slots": [
+      {
+        "prompt": "apologize profusely as many times as possible",
+        "direction": null,
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "112050",
+    "appearance": "EARLY",
+    "videoId": "111804",
+    "title": "Noisemaker Family - Vomiting",
+    "description": "A family celebrating a birthday blows on noisemakers.",
+    "video": "noiseMakerFamily.mp4",
+    "backingTrack": "VIDEO/singlePrompt/NoiseMakerFamily",
+    "slots": [
+      {
+        "prompt": "what you sound like when you’re throwing up",
+        "direction": "don’t use words!",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112051",
+    "appearance": "MID-GAME",
+    "videoId": "111814",
+    "title": "Honking Horn - Tickling",
+    "description": "An angry woman honks her horn in traffic.",
+    "video": "honkingHorn.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HonkingHorn",
+    "slots": [
+      {
+        "prompt": "what you’d sound like while being aggressively tickled",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "112058",
+    "appearance": "EARLY",
+    "videoId": "111804",
+    "title": "Noisemaker Family - Slide Trombone",
+    "description": "A family celebrating a birthday blows on noisemakers.",
+    "video": "noiseMakerFamily.mp4",
+    "backingTrack": "VIDEO/singlePrompt/NoiseMakerFamily",
+    "slots": [
+      {
+        "prompt": "the sound of a sad slide trombone",
+        "direction": "don’t use words!",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112065",
+    "appearance": "EARLY",
+    "videoId": "111814",
+    "title": "Honking Horn - Morning Stretch",
+    "description": "An angry woman honks her horn in traffic.",
+    "video": "honkingHorn.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HonkingHorn",
+    "slots": [
+      {
+        "prompt": "the sounds you make stretching your limbs in the morning",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "112071",
+    "appearance": "EARLY",
+    "videoId": "111810",
+    "title": "Elk Bugling - Dolphin",
+    "description": "An elk bugles in the wilderness.",
+    "video": "elkBugling.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ElkBugling",
+    "slots": [
+      {
+        "prompt": "your best dolphin impression",
+        "direction": "don’t use words!",
+        "durationMs": 3300
+      }
+    ]
+  },
+  {
+    "id": "112077",
+    "appearance": "EARLY",
+    "videoId": "111811",
+    "title": "Eavesdropping - Tennis",
+    "description": "A woman eavesdrops by listening through a wall.",
+    "video": "eavesDropping.mp4",
+    "backingTrack": "VIDEO/singlePrompt/EavesDropping",
+    "slots": [
+      {
+        "prompt": "the grunts of a very old man playing tennis",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "112107",
+    "appearance": "EARLY",
+    "videoId": "111814",
+    "title": "Honking Horn - Angry Cat",
+    "description": "An angry woman honks her horn in traffic.",
+    "video": "honkingHorn.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HonkingHorn",
+    "slots": [
+      {
+        "prompt": "a yowling cat",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "112240",
+    "appearance": "EARLY",
+    "videoId": "111326",
+    "title": "Tortoise Fight - Air Raid Siren",
+    "description": "Two tortoises angrily bare their mouths at each other.",
+    "video": "tortoiseFight.mp4",
+    "backingTrack": "VIDEO/singlePrompt/TortoiseFight",
+    "slots": [
+      {
+        "prompt": "give us your best impression of an air raid siren",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "112504",
+    "appearance": "MID-GAME",
+    "videoId": "109293",
+    "title": "Alarm Clock Man - Kid Don’ts",
+    "description": "A loud alarm clock wakes a sleeping man.",
+    "video": "alarmClockMan.mp4",
+    "backingTrack": "VIDEO/singlePrompt/AlarmClockMan",
+    "slots": [
+      {
+        "prompt": "name something that kids shouldn’t do",
+        "direction": null,
+        "durationMs": 2500
+      }
+    ]
+  },
+  {
+    "id": "112506",
+    "appearance": "LATE",
+    "videoId": "111755",
+    "title": "Football Game - Final Round",
+    "description": "A football team huddles up. A quarterback passes to a wide receiver. The crowd cheers from the stands.",
+    "video": "footballGame.mp4",
+    "backingTrack": "VIDEO/threePrompt/FootballGame",
+    "slots": [
+      {
+        "prompt": "give bad directions to a pedestrian",
+        "direction": "",
+        "durationMs": 5000
+      },
+      {
+        "prompt": "the song you hear as you ascend to heaven",
+        "direction": "",
+        "durationMs": 4000
+      },
+      {
+        "prompt": "shout your favorite male name",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112507",
+    "appearance": "MID-GAME",
+    "videoId": "109294",
+    "title": "Mystical Girl - Pop Song",
+    "description": "A cloaked figure holding a candle walks through the woods.",
+    "video": "mysticalGirl.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MysticalGirl",
+    "slots": [
+      {
+        "prompt": "mumble-sing the wrong words to a pop song",
+        "direction": null,
+        "durationMs": 6501
+      }
+    ]
+  },
+  {
+    "id": "112553",
+    "appearance": "LATE",
+    "videoId": "112548",
+    "title": "Bad Flight - Final Round",
+    "description": "An airplane soars through the clouds. A passenger is screaming. An air traffic controller checks in. The pilot makes an announcement.",
+    "video": "badFlight.mp4",
+    "backingTrack": "VIDEO/threePrompt/BadFlight",
+    "slots": [
+      {
+        "prompt": "the sound of a car with really bad brakes",
+        "direction": "don’t use words!",
+        "durationMs": 3000
+      },
+      {
+        "prompt": "give us your best Tarzan yell",
+        "direction": "don’t use words!",
+        "durationMs": 3200
+      },
+      {
+        "prompt": "something the captain of the Titanic might have said",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "112654",
+    "appearance": "LATE",
+    "videoId": "112651",
+    "title": "Courtroom - Final Round",
+    "description": "An attorney presents to a courtroom jury. A judge bangs her gavel. A wiener dog is locked in a jail cell.",
+    "video": "courtroomv3.mp4",
+    "backingTrack": "VIDEO/threePrompt/Courtroom",
+    "slots": [
+      {
+        "prompt": "complain about your messy roommate",
+        "direction": null,
+        "durationMs": 4800
+      },
+      {
+        "prompt": "the sound of a squeaky toy",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      },
+      {
+        "prompt": "something you might say during a really bad day",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112658",
+    "appearance": "EARLY",
+    "videoId": "112616",
+    "title": "Nutcrackers in Shock - Studio Audience",
+    "description": "Christmas nutcrackers open their mouths in shock in unison.",
+    "video": "nutcrackersInShock.mp4",
+    "backingTrack": "VIDEO/singlePrompt/NutcrackersInShock",
+    "slots": [
+      {
+        "prompt": "the sound of a shocked studio audience",
+        "direction": null,
+        "durationMs": 2850
+      }
+    ]
+  },
+  {
+    "id": "112662",
+    "appearance": "EARLY",
+    "videoId": "112624",
+    "title": "Alien Abduction - Boat Horn",
+    "description": "A cow is beamed up to an alien spaceship.",
+    "video": "alienAbduction.mp4",
+    "backingTrack": "VIDEO/singlePrompt/AlienAbduction",
+    "slots": [
+      {
+        "prompt": "a boat horn fading into the distance",
+        "direction": "don’t use words!",
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "112669",
+    "appearance": "MID-GAME",
+    "videoId": "112615",
+    "title": "Puppet Businessman - Mob Boss",
+    "description": "A blue puppet in a shirt and tie speaks.",
+    "video": "puppetBusinessman.mp4",
+    "backingTrack": "VIDEO/singlePrompt/PuppetBusinessman",
+    "slots": [
+      {
+        "prompt": "a mob boss with a high-pitched voice",
+        "direction": null,
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "112676",
+    "appearance": "LATE",
+    "videoId": "112675",
+    "title": "Meditation - Final Round",
+    "description": "A rake gently draws lines in zen garden sand. A yoga teacher speaks to her class. A seated yoga student concentrates, eyes closed. The yoga teacher gestures to the class. People sit cross-legged on yoga mats with eyes closed.",
+    "video": "meditation.mp4",
+    "backingTrack": "VIDEO/threePrompt/Meditation",
+    "slots": [
+      {
+        "prompt": "the sound of a breeze gently flowing through the trees",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      },
+      {
+        "prompt": "the sound of your intrusive thoughts",
+        "direction": null,
+        "durationMs": 4800
+      },
+      {
+        "prompt": "the sound of a balloon deflating",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "112691",
+    "appearance": "MID-GAME",
+    "videoId": "112610",
+    "title": "Easter Bunny - Happy Birthday",
+    "description": "A giant bunny grabs a carrot from a refrigerator.",
+    "video": "easterBunny.mp4",
+    "backingTrack": "VIDEO/singlePrompt/EasterBunny",
+    "slots": [
+      {
+        "prompt": "sing happy birthday to yourself like a crooner",
+        "direction": null,
+        "durationMs": 6000
+      }
+    ]
+  },
+  {
+    "id": "112719",
+    "appearance": "LATE",
+    "videoId": "112706",
+    "title": "Look Up - Final Round",
+    "description": "A child tugs at his father’s hand. A woman in a crowd points at the sky. A humpback whale swims through the clouds. A man in glasses stares up at the whale.",
+    "video": "lookUp.mp4",
+    "backingTrack": "VIDEO/threePrompt/LookUp",
+    "slots": [
+      {
+        "prompt": "the sound of a child whining",
+        "direction": "don’t use words!",
+        "durationMs": 3700
+      },
+      {
+        "prompt": "the sound of pure amazement",
+        "direction": null,
+        "durationMs": 2500
+      },
+      {
+        "prompt": "the sound of gurgling mouthwash",
+        "direction": "don’t use words!",
+        "durationMs": 4800
+      }
+    ]
+  },
+  {
+    "id": "112720",
+    "appearance": "LATE",
+    "videoId": "112708",
+    "title": "Soap Opera - Final Round",
+    "description": "A man explains something to a woman who slaps him. The slap replays twice before the man walks away. Two women on a couch react to the TV scene.",
+    "video": "soapOpera.mp4",
+    "backingTrack": "VIDEO/threePrompt/SoapOpera",
+    "slots": [
+      {
+        "prompt": "a lovers’ quarrel in gibberish",
+        "direction": "don’t use words!",
+        "durationMs": 4750
+      },
+      {
+        "prompt": "the sound of a karate chop",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      },
+      {
+        "prompt": "something you’d say after watching the worst movie ever",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112721",
+    "appearance": "LATE",
+    "videoId": "112707",
+    "title": "Game Show - Final Round",
+    "description": "Game show contestants hit their buzzers. A contestant gives her answer. Money rains down from the ceiling.",
+    "video": "gameShow.mp4",
+    "backingTrack": "VIDEO/threePrompt/GameShow",
+    "slots": [
+      {
+        "prompt": "the sound of a cutesy car honk",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      },
+      {
+        "prompt": "cheer the name of a band you liked in high school",
+        "direction": null,
+        "durationMs": 2000
+      },
+      {
+        "prompt": "the sound of hysterical joy",
+        "direction": null,
+        "durationMs": 2500
+      }
+    ]
+  },
+  {
+    "id": "112735",
+    "appearance": "EARLY",
+    "videoId": "112618",
+    "title": "Bagpipe Player - Car Horns",
+    "description": "A man plays bagpipes on a bridge.",
+    "video": "bagpipePlayer.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Bagpipe",
+    "slots": [
+      {
+        "prompt": "different angry car horns in a traffic jam",
+        "direction": "don’t use words!",
+        "durationMs": 3200
+      }
+    ]
+  },
+  {
+    "id": "112736",
+    "appearance": "MID-GAME",
+    "videoId": "112621",
+    "title": "Head in the Sand - Mom? Dad?",
+    "description": "A man sticks his head into a hole in the ground.",
+    "video": "headInTheSand.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HeadInSand",
+    "slots": [
+      {
+        "prompt": "the sound of a kid trying to find their parent in a grocery store",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "112774",
+    "appearance": "LATE",
+    "videoId": "112773",
+    "title": "Rap Studio - Final Round",
+    "description": "Two music producers in a studio point to a screen. A bass speaker vibrates. A man with dreadlocks raps into a mic. A smiling dad drives with his wife and two kids. A hand turns up the car stereo’s volume dial.",
+    "video": "rapStudio.mp4",
+    "backingTrack": "VIDEO/threePrompt/RapStudio",
+    "slots": [
+      {
+        "prompt": "give us your best beatboxing",
+        "direction": "don’t use words!",
+        "durationMs": 2500
+      },
+      {
+        "prompt": "rap a children’s nursery rhyme",
+        "direction": "",
+        "durationMs": 4750
+      },
+      {
+        "prompt": "a ridiculous name for a DJ",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "112776",
+    "appearance": "MID-GAME",
+    "videoId": "112624",
+    "title": "Alien Abduction - No",
+    "description": "A cow is beamed up to an alien spaceship.",
+    "video": "alienAbduction.mp4",
+    "backingTrack": "VIDEO/singlePrompt/AlienAbduction",
+    "slots": [
+      {
+        "prompt": "frantically refuse something using only the word “no”",
+        "direction": null,
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "112778",
+    "appearance": "MID-GAME",
+    "videoId": "112616",
+    "title": "Nutcrackers In Shock - Gospel Choir",
+    "description": "Christmas nutcrackers open their mouths in shock in unison.",
+    "video": "nutcrackersInShock.mp4",
+    "backingTrack": "VIDEO/singlePrompt/NutcrackersInShock",
+    "slots": [
+      {
+        "prompt": "something a gospel choir would shout",
+        "direction": null,
+        "durationMs": 2850
+      }
+    ]
+  },
+  {
+    "id": "112783",
+    "appearance": "EARLY",
+    "videoId": "112624",
+    "title": "Alien Abduction - Fear Of Heights",
+    "description": "A cow is beamed up to an alien spaceship.",
+    "video": "alienAbduction.mp4",
+    "backingTrack": "VIDEO/singlePrompt/AlienAbduction",
+    "slots": [
+      {
+        "prompt": "the sound of someone who’s afraid of heights climbing a ladder",
+        "direction": "don’t use words!",
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "112784",
+    "appearance": "MID-GAME",
+    "videoId": "112625",
+    "title": "Dinosaur Beach - LOML",
+    "description": "An inflatable T-Rex runs on the beach.",
+    "video": "dinosaurBeach.mp4",
+    "backingTrack": "VIDEO/singlePrompt/DinosaurBeach",
+    "slots": [
+      {
+        "prompt": "shouting after the love of your life who’s walking away",
+        "direction": null,
+        "durationMs": 3700
+      }
+    ]
+  },
+  {
+    "id": "112959",
+    "appearance": "LATE",
+    "videoId": "112958",
+    "title": "Wings - Final Round",
+    "description": "A small yellow bird sings atop a tree branch. A man looking through binoculars turns slowly. A flock of birds in flight. Someone picks clean a fried drumstick.",
+    "video": "wings.mp4",
+    "backingTrack": "VIDEO/threePrompt/Wings",
+    "slots": [
+      {
+        "prompt": "the sound of an old ringtone",
+        "direction": "don’t use words!",
+        "durationMs": 3000
+      },
+      {
+        "prompt": "the sound of seeing something that looks delicious",
+        "direction": "",
+        "durationMs": 2500
+      },
+      {
+        "prompt": "the sound of a dog gnawing on a bone",
+        "direction": "don’t use words!",
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112963",
+    "appearance": "LATE",
+    "videoId": "112960",
+    "title": "Itch - Final Round",
+    "description": "A man slaps an insect on his neck and winces. A mosquito sucks blood from a finger. A man applies bug spray to a fellow camper’s wrist.",
+    "video": "itch.mp4",
+    "backingTrack": "VIDEO/threePrompt/Itch",
+    "slots": [
+      {
+        "prompt": "the sound of a racecar speeding by",
+        "direction": "don’t use words!",
+        "durationMs": 3000
+      },
+      {
+        "prompt": "something a thirsty vampire might say",
+        "direction": null,
+        "durationMs": 4300
+      },
+      {
+        "prompt": "the tiniest scream ever",
+        "direction": "don’t use words!",
+        "durationMs": 2800
+      }
+    ]
+  },
+  {
+    "id": "112964",
+    "appearance": "LATE",
+    "videoId": "112961",
+    "title": "Workout - Final Round",
+    "description": "A man in athletic wear does leg raises on the floor. The man does a quick series of lifts and stretches. Two arms lift a small dog, who looks at the camera.",
+    "video": "workout.mp4",
+    "backingTrack": "VIDEO/threePrompt/Workout",
+    "slots": [
+      {
+        "prompt": "the sound of a creaky doorway",
+        "direction": "don’t use words!",
+        "durationMs": 2200
+      },
+      {
+        "prompt": "a self-love affirmation",
+        "direction": null,
+        "durationMs": 5500
+      },
+      {
+        "prompt": "the sound of someone trying to lift a bus",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "112965",
+    "appearance": "LATE",
+    "videoId": "112962",
+    "title": "ASMR - Final Round",
+    "description": "A woman scratches a microphone with her nails.\nShe speaks softly into the mic. A man watching her video unsubscribes.",
+    "video": "asmr.mp4",
+    "backingTrack": "VIDEO/threePrompt/ASMR",
+    "slots": [
+      {
+        "prompt": "the pitter patter of tiny feet",
+        "direction": "don’t use words!",
+        "durationMs": 2600
+      },
+      {
+        "prompt": "say your go-to fast food order in a sexy whisper",
+        "direction": null,
+        "durationMs": 5400
+      },
+      {
+        "prompt": "the sound of a wrong answer buzzer on a game show",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "113002",
+    "appearance": "EARLY",
+    "videoId": "112625",
+    "title": "Dinosaur Beach - Sobbing",
+    "description": "An inflatable T-Rex runs on the beach.",
+    "video": "dinosaurBeach.mp4",
+    "backingTrack": "VIDEO/singlePrompt/DinosaurBeach",
+    "slots": [
+      {
+        "prompt": "loud, open-mouthed sobbing",
+        "direction": "don’t use words!",
+        "durationMs": 3700
+      }
+    ]
+  },
+  {
+    "id": "113007",
+    "appearance": "MID-GAME",
+    "videoId": "112627",
+    "title": "Surprise Party - Name",
+    "description": "A woman enters a surprise party as the guests cheer.",
+    "video": "surpriseParty.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SurpriseParty",
+    "slots": [
+      {
+        "prompt": "yell a word you’d call someone when you can’t remember their name",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "113014",
+    "appearance": "MID-GAME",
+    "videoId": "111814",
+    "title": "Honking Horn - Onomatopoeia",
+    "description": "An angry woman honks her horn in traffic.",
+    "video": "honkingHorn.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HonkingHorn",
+    "slots": [
+      {
+        "prompt": "say an onomatopoeia in the most monotone voice ever",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "113015",
+    "appearance": "EARLY",
+    "videoId": "111815",
+    "title": "Movie Couple - Pterodactyl",
+    "description": "Two theatergoers get scared by something onscreen, spilling popcorn.",
+    "video": "movieCouple.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MovieCouple",
+    "slots": [
+      {
+        "prompt": "the sound of a screeching pterodactyl",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113016",
+    "appearance": "EARLY",
+    "videoId": "111815",
+    "title": "Movie Couple - Werewolf",
+    "description": "Two theatergoers get scared by something onscreen, spilling popcorn.",
+    "video": "movieCouple.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MovieCouple",
+    "slots": [
+      {
+        "prompt": "the sound of a werewolf eating a guy",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113104",
+    "appearance": "MID-GAME",
+    "videoId": "113047",
+    "title": "Medieval Knight - Coffee",
+    "description": "A medieval knight in battle lowers his helmet visor.",
+    "video": "medievalKnight.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MedievalKnight",
+    "slots": [
+      {
+        "prompt": "declare your coffee order like you’re an action hero",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113169",
+    "appearance": "EARLY",
+    "videoId": "113037",
+    "title": "Avocado Lady - Laugh Crying",
+    "description": "A grinning woman holds an avocado up to her cheek.",
+    "video": "avocadoLady.mp4",
+    "backingTrack": "VIDEO/singlePrompt/AvocadoLady",
+    "slots": [
+      {
+        "prompt": "laughing and crying at the same time",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113219",
+    "appearance": "MID-GAME",
+    "videoId": "113047",
+    "title": "Medieval Knight - Dark Panic",
+    "description": "A medieval knight in battle lowers his helmet visor.",
+    "video": "medievalKnight.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MedievalKnight",
+    "slots": [
+      {
+        "prompt": "panic about being in the dark",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113221",
+    "appearance": "EARLY",
+    "videoId": "113037",
+    "title": "Avocado Lady - Little Elf",
+    "description": "A grinning woman holds an avocado up to her cheek.",
+    "video": "avocadoLady.mp4",
+    "backingTrack": "VIDEO/singlePrompt/AvocadoLady",
+    "slots": [
+      {
+        "prompt": "a mischievous little elf laughing at you",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113226",
+    "appearance": "MID-GAME",
+    "videoId": "113036",
+    "title": "Monkey Business - Professional Confession",
+    "description": "A chimpanzee in business attire hangs up the phone.",
+    "video": "monkeyBusiness.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MonkeyBusiness",
+    "slots": [
+      {
+        "prompt": "inform someone you’ve pooped yourself in the most professional manner possible",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113227",
+    "appearance": "MID-GAME",
+    "videoId": "113051",
+    "title": "Golf Swing - Angry",
+    "description": "A female golfer hits the ball with a powerful swing.",
+    "video": "golfSwing.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GolfSwing",
+    "slots": [
+      {
+        "prompt": "an angry exclamation",
+        "direction": null,
+        "durationMs": 2750
+      }
+    ]
+  },
+  {
+    "id": "113240",
+    "appearance": "MID-GAME",
+    "videoId": "109602",
+    "title": "Unity Hands - Swear Word",
+    "description": "A group of people puts their hands together in a huddle.",
+    "video": "unityHands.mp4",
+    "backingTrack": "VIDEO/singlePrompt/UnityHands",
+    "slots": [
+      {
+        "prompt": "cheerfully shout your favorite swear word",
+        "direction": null,
+        "durationMs": 2267
+      }
+    ]
+  },
+  {
+    "id": "113292",
+    "appearance": "LATE",
+    "videoId": "113291",
+    "title": "Clone Lab - Final Round",
+    "description": "A scientist adds liquid to a test tube. Magnified cells begin multiplying rapidly. Identical men in suits march in unison.",
+    "video": "cloneLab.mp4",
+    "backingTrack": "VIDEO/threePrompt/CloneLab",
+    "slots": [
+      {
+        "prompt": "the trickle of an old water fountain",
+        "direction": null,
+        "durationMs": 2600
+      },
+      {
+        "prompt": "telling someone to wait up",
+        "direction": null,
+        "durationMs": 2000
+      },
+      {
+        "prompt": "chant a business-related word",
+        "direction": null,
+        "durationMs": 2600
+      }
+    ]
+  },
+  {
+    "id": "113386",
+    "appearance": "EARLY",
+    "videoId": "113325",
+    "title": "Silly Tube Man - Pain",
+    "description": "A gigantic, red balloon man flailing in the wind.",
+    "video": "sillyTubeMan.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SillyTubeMan",
+    "slots": [
+      {
+        "prompt": "the sound of pain and agony and more pain",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113413",
+    "appearance": "EARLY",
+    "videoId": "113412",
+    "title": "Glowing Gift - Angelic Choir",
+    "description": "A woman opens a glowing gift box at Christmas time.",
+    "video": "glowingGift.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GlowingGift",
+    "slots": [
+      {
+        "prompt": "the sound of an angelic choir",
+        "direction": null,
+        "durationMs": 2750
+      }
+    ]
+  },
+  {
+    "id": "113453",
+    "appearance": "EARLY",
+    "videoId": "113179",
+    "title": "Ghost Guy - Ooh Ahh",
+    "description": "A sheet ghost in sunglasses dances in an autumn wood.",
+    "video": "ghostGuy.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GhostGuy",
+    "slots": [
+      {
+        "prompt": "various ooohs and ahhhhhs",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113454",
+    "appearance": "MID-GAME",
+    "videoId": "113036",
+    "title": "Monkey Business - Telemarketer",
+    "description": "A chimpanzee in business attire hangs up the phone.",
+    "video": "monkeyBusiness.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MonkeyBusiness",
+    "slots": [
+      {
+        "prompt": "sternly inform a telemarketer that you’re on the DO NOT CALL list",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113457",
+    "appearance": "EARLY",
+    "videoId": "112621",
+    "title": "Head In The Sand - Frustration",
+    "description": "A man sticks his head into a hole in the ground.",
+    "video": "headInTheSand.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HeadInSand",
+    "slots": [
+      {
+        "prompt": "the sound of releasing pent-up frustration",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113468",
+    "appearance": "EARLY",
+    "videoId": "113325",
+    "title": "Silly Tube Man - Babbling",
+    "description": "A gigantic, red balloon man flailing in the wind.",
+    "video": "sillyTubeMan.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SillyTubeMan",
+    "slots": [
+      {
+        "prompt": "babbling in gibberish",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113470",
+    "appearance": "MID-GAME",
+    "videoId": "113325",
+    "title": "Silly Tube Man - Over Here",
+    "description": "A gigantic, red balloon man flailing in the wind.",
+    "video": "sillyTubeMan.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SillyTubeMan",
+    "slots": [
+      {
+        "prompt": "shouting “over here!” to get someone’s attention",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113480",
+    "appearance": "MID-GAME",
+    "videoId": "113322",
+    "title": "Hand In Breeze - Country Song",
+    "description": "On a country road, a hand feels the breeze from a car window.",
+    "video": "handInBreeze.mp4",
+    "backingTrack": "VIDEO/singlePrompt/HandInBreeze",
+    "slots": [
+      {
+        "prompt": "your impression of a twangy country song",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113483",
+    "appearance": "EARLY",
+    "videoId": "113325",
+    "title": "Silly Tube Man - Seasick",
+    "description": "A gigantic, red balloon man flailing in the wind.",
+    "video": "sillyTubeMan.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SillyTubeMan",
+    "slots": [
+      {
+        "prompt": "what you’d sound like while seasick on a cruise ship",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113489",
+    "appearance": "MID-GAME",
+    "videoId": "113330",
+    "title": "Creepy Doll - Twinkle",
+    "description": "Flashes of light illuminate a creepy, cracked antique baby doll.",
+    "video": "creepyDoll.mp4",
+    "backingTrack": "VIDEO/singlePrompt/CreepyDoll",
+    "slots": [
+      {
+        "prompt": "a solemn reading of “Twinkle, Twinkle, Little Star”",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113491",
+    "appearance": "MID-GAME",
+    "videoId": "113603",
+    "title": "Conch Shell - Voicemail",
+    "description": "A woman on a beach holds a conch shell to her ear.",
+    "video": "conchShell.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ConchShell",
+    "slots": [
+      {
+        "prompt": "a rude voicemail greeting",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113500",
+    "appearance": "MID-GAME",
+    "videoId": "113339",
+    "title": "Dissociating - Criminal",
+    "description": "A businessman, lost in thought, overfills his coffee cup.",
+    "video": "dissociating.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Dissociating",
+    "slots": [
+      {
+        "prompt": "a criminal’s to-do list",
+        "direction": "",
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113504",
+    "appearance": "MID-GAME",
+    "videoId": "113334",
+    "title": "Monster In The Closet - Bathroom",
+    "description": "A door creaks open, and a monster hand creeps in.",
+    "video": "monsterInCloset.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MonsterInCloset",
+    "slots": [
+      {
+        "prompt": "politely ask if the person using the public bathroom can hurry",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113557",
+    "appearance": "EARLY",
+    "videoId": "113556",
+    "title": "Umbrella Beach - Pants",
+    "description": "A woman on a windy beach struggles to hold onto her umbrella.",
+    "video": "umbrellaBeach.mp4",
+    "backingTrack": "VIDEO/singlePrompt/UmbrellaBeach",
+    "slots": [
+      {
+        "prompt": "the sound of struggling to put on pants",
+        "direction": "don’t use words!",
+        "durationMs": 3500
+      }
+    ]
+  },
+  {
+    "id": "113607",
+    "appearance": "MID-GAME",
+    "videoId": "113330",
+    "title": "Creepy Doll - CareBear",
+    "description": "Flashes of light illuminate a creepy, cracked antique baby doll.",
+    "video": "creepyDoll.mp4",
+    "backingTrack": "VIDEO/singlePrompt/CreepyDoll",
+    "slots": [
+      {
+        "prompt": "something a Care Bear might say",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "113636",
+    "appearance": "EARLY",
+    "videoId": "113539",
+    "title": "Witchy Woman - Sibling Pester",
+    "description": "A witch sits in a pentagram, casting spells over a potion.",
+    "video": "witchyWoman.mp4",
+    "backingTrack": "VIDEO/singlePrompt/WitchyWoman",
+    "slots": [
+      {
+        "prompt": "annoying noises you’d make to pester your sibling",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113651",
+    "appearance": "MID-GAME",
+    "videoId": "113543",
+    "title": "Math Professor - Tip",
+    "description": "Time-lapse of a professor filling a big chalkboard with equations.",
+    "video": "mathProfessor.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MathProfessor",
+    "slots": [
+      {
+        "prompt": "someone calculating how much to tip the server",
+        "direction": null,
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "113661",
+    "appearance": "MID-GAME",
+    "videoId": "113543",
+    "title": "Math Professor - Pythagorean Theorem",
+    "description": "Time-lapse of a professor filling a big chalkboard with equations.",
+    "video": "mathProfessor.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MathProfessor",
+    "slots": [
+      {
+        "prompt": "badly explain the Pythagorean theorem",
+        "direction": null,
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "113717",
+    "appearance": "MID-GAME",
+    "videoId": "113543",
+    "title": "Math Professor - Dumb Buy",
+    "description": "Time-lapse of a professor filling a big chalkboard with equations.",
+    "video": "mathProfessor.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MathProfessor",
+    "slots": [
+      {
+        "prompt": "mathematically justify a dumb purchase you made",
+        "direction": null,
+        "durationMs": 5500
+      }
+    ]
+  },
+  {
+    "id": "113718",
+    "appearance": "MID-GAME",
+    "videoId": "113540",
+    "title": "Old Ceremony - Jingle",
+    "description": "Slavic women dance hand-in-hand, circling a tree.",
+    "video": "oldCeremony.mp4",
+    "backingTrack": "VIDEO/singlePrompt/OldCeremony",
+    "slots": [
+      {
+        "prompt": "sing any catchy commercial jingle",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113720",
+    "appearance": "MID-GAME",
+    "videoId": "113542",
+    "title": "Baby Turtle - So... Thirsty...",
+    "description": "A baby turtle slowly crawls to the ocean.",
+    "video": "babyTurtle.mp4",
+    "backingTrack": "VIDEO/singlePrompt/BabyTurtle",
+    "slots": [
+      {
+        "prompt": "an extremely thirsty person crawling through the desert",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113725",
+    "appearance": "MID-GAME",
+    "videoId": "113336",
+    "title": "Bigfoot Texting - Body Hair",
+    "description": "Bigfoot’s hairy hands type out a text message.",
+    "video": "bigfootTexting.mp4",
+    "backingTrack": "VIDEO/singlePrompt/BigfootTexting",
+    "slots": [
+      {
+        "prompt": "nervously ask “how would you feel dating someone with body hair?”",
+        "direction": "",
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "113738",
+    "appearance": "MID-GAME",
+    "videoId": "113542",
+    "title": "Baby Turtle - Push ups",
+    "description": "A baby turtle slowly crawls to the ocean.",
+    "video": "babyTurtle.mp4",
+    "backingTrack": "VIDEO/singlePrompt/BabyTurtle",
+    "slots": [
+      {
+        "prompt": "a tough little guy counting push-ups",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "113832",
+    "appearance": "EARLY",
+    "videoId": "113556",
+    "title": "Umbrella Beach - Chip Ant",
+    "description": "A woman on a windy beach struggles to hold onto her umbrella.",
+    "video": "umbrellaBeach.mp4",
+    "backingTrack": "VIDEO/singlePrompt/UmbrellaBeach",
+    "slots": [
+      {
+        "prompt": "the sound of an ant struggling to lift a potato chip",
+        "direction": "don’t use words!",
+        "durationMs": 3500
+      }
+    ]
+  },
+  {
+    "id": "113856",
+    "appearance": "EARLY",
+    "videoId": "113548",
+    "title": "Clown Alley - OoOh",
+    "description": "A row of open-mouthed clown figurines at a local fair.",
+    "video": "clownAlley.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ClownAlley",
+    "slots": [
+      {
+        "prompt": "say “OoOh” mockingly",
+        "direction": null,
+        "durationMs": 2750
+      }
+    ]
+  },
+  {
+    "id": "113901",
+    "appearance": "EARLY",
+    "videoId": "113042",
+    "title": "Slime Fingers - Poke",
+    "description": "Someone inserts their fingers into green slime.",
+    "video": "slimeFingers.mp4",
+    "backingTrack": "VIDEO/singlePrompt/SlimeFingers",
+    "slots": [
+      {
+        "prompt": "the sound you’d make if someone poked you really hard",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "113921",
+    "appearance": "MID-GAME",
+    "videoId": "111207",
+    "title": "Gospel Choir - Late Night Snack",
+    "description": "A gospel choir joyously claps and sings.",
+    "video": "gospelChoir.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GospelChoir",
+    "slots": [
+      {
+        "prompt": "sing your favorite late-night snack",
+        "direction": null,
+        "durationMs": 3250
+      }
+    ]
+  },
+  {
+    "id": "113930",
+    "appearance": "MID-GAME",
+    "videoId": "109601",
+    "title": "Megaphone On Cliff - YEA BOI",
+    "description": "A man on a cliff shouts into a megaphone.",
+    "video": "megaphoneOnCliff.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MegaphoneOnCliff",
+    "slots": [
+      {
+        "prompt": "the longest “yeah boy” ever",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "114364",
+    "appearance": "MID-GAME",
+    "videoId": "109797",
+    "title": "Musical Card - Insults",
+    "description": "A woman opens a greeting card and smiles.",
+    "video": "musicalCard.mp4",
+    "backingTrack": "VIDEO/singlePrompt/MusicalCard",
+    "slots": [
+      {
+        "prompt": "let out a string of insults",
+        "direction": null,
+        "durationMs": 5000
+      }
+    ]
+  },
+  {
+    "id": "114408",
+    "appearance": "LATE",
+    "videoId": "114407",
+    "title": "Late Night Office - Final Round",
+    "description": "The exterior of an office building at night.\nA man observes through binoculars.\nAn empty room with many screens displaying cybersecurity data.\nThe man peers through binoculars again.\nThree office workers dance and party on top of a desk.\nThe man lowers his binoculars in disbelief.",
+    "video": "lateNightOffice.mp4",
+    "backingTrack": "VIDEO/threePrompt/LateNightOffice",
+    "slots": [
+      {
+        "prompt": "hum a little tune to yourself",
+        "direction": "don’t use words!",
+        "durationMs": 2500
+      },
+      {
+        "prompt": "hooting & hollering",
+        "direction": null,
+        "durationMs": 3500
+      },
+      {
+        "prompt": "gasp like you’re in a telenovela",
+        "direction": null,
+        "durationMs": 2300
+      }
+    ]
+  },
+  {
+    "id": "114409",
+    "appearance": "LATE",
+    "videoId": "114406",
+    "title": "Racecar - Final Round",
+    "description": "A coach speaks to a racecar driver. Race start lights change from red to green. The racecar peels out and speeds down the track. The racecar stops for service by the pit crew. The racecar speeds off and crosses the finish line. Several other racecars cross the finish line.",
+    "video": "raceCar.mp4",
+    "backingTrack": "VIDEO/threePrompt/RaceCar",
+    "slots": [
+      {
+        "prompt": "a two-word life motto",
+        "direction": null,
+        "durationMs": 2500
+      },
+      {
+        "prompt": "the sound of a chainsaw revving up",
+        "direction": "don’t use words!",
+        "durationMs": 3200
+      },
+      {
+        "prompt": "the sound of an angry bee",
+        "direction": "don’t use words!",
+        "durationMs": 3100
+      }
+    ]
+  },
+  {
+    "id": "114410",
+    "appearance": "LATE",
+    "videoId": "114404",
+    "title": "Seminar - Final Round",
+    "description": "A smartly dressed woman walks on stage to a podium. She gestures to a large screen behind her. A photo of wind-up chattering teeth is shown. The audience members nod and discuss.",
+    "video": "seminar.mp4",
+    "backingTrack": "VIDEO/threePrompt/Seminar",
+    "slots": [
+      {
+        "prompt": "an outrageous name for a professor",
+        "direction": null,
+        "durationMs": 3000
+      },
+      {
+        "prompt": "a dumb inspirational quote",
+        "direction": null,
+        "durationMs": 4400
+      },
+      {
+        "prompt": "impressed murmuring",
+        "direction": null,
+        "durationMs": 2800
+      }
+    ]
+  },
+  {
+    "id": "114412",
+    "appearance": "LATE",
+    "videoId": "114405",
+    "title": "Construction - Final Round",
+    "description": "Workers at a construction site discuss plans.\nWorkers cut and jackhammer raw materials.\nA hand lays a brick.\nA dilapidated house is shown.\nThe workers congratulate and high-five one another.",
+    "video": "construction.mp4",
+    "backingTrack": "VIDEO/threePrompt/Construction",
+    "slots": [
+      {
+        "prompt": "absentmindedly describe a skyscraper",
+        "direction": null,
+        "durationMs": 4500
+      },
+      {
+        "prompt": "roll your “R”s aggressively",
+        "direction": "don’t use words!",
+        "durationMs": 2800
+      },
+      {
+        "prompt": "the squeaking of a rusty see-saw",
+        "direction": "don’t use words!",
+        "durationMs": 2400
+      }
+    ]
+  },
+  {
+    "id": "114413",
+    "appearance": "MID-GAME",
+    "videoId": "113336",
+    "title": "Bigfoot Texting - Tame Sext",
+    "description": "Bigfoot’s hairy hands type out a text message.",
+    "video": "bigfootTexting.mp4",
+    "backingTrack": "VIDEO/singlePrompt/BigfootTexting",
+    "slots": [
+      {
+        "prompt": "a very tame sext",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "114421",
+    "appearance": "MID-GAME",
+    "videoId": "113603",
+    "title": "Conch Shell - Threatening Call",
+    "description": "A woman on a beach holds a conch shell to her ear.",
+    "video": "conchShell.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ConchShell",
+    "slots": [
+      {
+        "prompt": "a threatening phone call",
+        "direction": null,
+        "durationMs": 4500
+      }
+    ]
+  },
+  {
+    "id": "114422",
+    "appearance": "EARLY",
+    "videoId": "113548",
+    "title": "Clown Alley - Monotone Laugh",
+    "description": "A row of open-mouthed clown figurines at a local fair.",
+    "video": "clownAlley.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ClownAlley",
+    "slots": [
+      {
+        "prompt": "an extremely monotone laugh",
+        "direction": "don’t use words!",
+        "durationMs": 2750
+      }
+    ]
+  },
+  {
+    "id": "114425",
+    "appearance": "LATE",
+    "videoId": "114423",
+    "title": "Scary Forest - Final Round",
+    "description": "A woman runs through a dense forest in the distance. A close-up of the woman running while looking around frantically. Two folklore monsters look on from behind some driftwood.",
+    "video": "scaryForest.mp4",
+    "backingTrack": "VIDEO/threePrompt/ScaryForest",
+    "slots": [
+      {
+        "prompt": "the sound of sheer terror, “AHHH”",
+        "direction": null,
+        "durationMs": 2000
+      },
+      {
+        "prompt": "what you’d sound like while running a marathon",
+        "direction": "don’t use words!",
+        "durationMs": 3500
+      },
+      {
+        "prompt": "what you’d say if someone left your party early",
+        "direction": null,
+        "durationMs": 3300
+      }
+    ]
+  },
+  {
+    "id": "114427",
+    "appearance": "MID-GAME",
+    "videoId": "114426",
+    "title": "Princess Reading - Fairy Tale",
+    "description": "A princess dressed in pink reads in a grassy field.",
+    "video": "princessReading.mp4",
+    "backingTrack": "VIDEO/singlePrompt/PrincessReading",
+    "slots": [
+      {
+        "prompt": "the beginning of a very bad fairy tale",
+        "direction": null,
+        "durationMs": 6000
+      }
+    ]
+  },
+  {
+    "id": "114430",
+    "appearance": "EARLY",
+    "videoId": "113035",
+    "title": "Cheerleader - Deep Hole",
+    "description": "A cheerleader is tossed into the air and then comes back down.",
+    "video": "cheerleader.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Cheerleader",
+    "slots": [
+      {
+        "prompt": "the sound of falling down a really deep hole",
+        "direction": "don’t use words!",
+        "durationMs": 2650
+      }
+    ]
+  },
+  {
+    "id": "114431",
+    "appearance": "EARLY",
+    "videoId": "111958",
+    "title": "Criminal Dog Car - Comet",
+    "description": "A dachshund presses a red button, triggering a car to explode.",
+    "video": "criminalDogCar.mp4",
+    "backingTrack": "VIDEO/series/criminalDog/CriminalDog_Car",
+    "slots": [
+      {
+        "prompt": "the sound a comet makes when it lands",
+        "direction": "don’t use words!",
+        "durationMs": 2800
+      }
+    ]
+  },
+  {
+    "id": "114435",
+    "appearance": "MID-GAME",
+    "videoId": "114434",
+    "title": "Emotional Dance - Whisper Meats",
+    "description": "A male office worker performs a seated interpretive dance.",
+    "video": "emotionalDance.mp4",
+    "backingTrack": "VIDEO/singlePrompt/EmotionalDance",
+    "slots": [
+      {
+        "prompt": "whisper various meats in a sensual voice",
+        "direction": null,
+        "durationMs": 4700
+      }
+    ]
+  },
+  {
+    "id": "114436",
+    "appearance": "EARLY",
+    "videoId": "114418",
+    "title": "Werewolf - Ow",
+    "description": "The silhouette of a werewolf howling atop a mountain.",
+    "video": "werewolf.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Werewolf",
+    "slots": [
+      {
+        "prompt": "a really drawn-out “ouch,” “owww” or “yowch!”",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "114449",
+    "appearance": "LATE",
+    "videoId": "114447",
+    "title": "Dino Desert - Final Round",
+    "description": "A man in a business suit crawls up a sand dune. \nA dinosaur roars at him.\nThe man quickly hurries back down the dune.",
+    "video": "dinoDesert.mp4",
+    "backingTrack": "VIDEO/threePrompt/DinoDesert",
+    "slots": [
+      {
+        "prompt": "the sound of strenuous exercise",
+        "direction": "don’t use words!",
+        "durationMs": 5000
+      },
+      {
+        "prompt": "an unhinged scream",
+        "direction": "don’t use words!",
+        "durationMs": 2200
+      },
+      {
+        "prompt": "every synonym you can think of for the word “no”",
+        "direction": null,
+        "durationMs": 3700
+      }
+    ]
+  },
+  {
+    "id": "114450",
+    "appearance": "LATE",
+    "videoId": "114416",
+    "title": "Paparazzi - Final Round",
+    "description": "Dozens of paparazzi yell and snap photos. A glamorous blonde woman steps out of a limo. She poses for the cameras. She waves and blows a kiss to the crowd. She raises a golden award, smiling.",
+    "video": "paparazzi.mp4",
+    "backingTrack": "VIDEO/threePrompt/Paparazzi",
+    "slots": [
+      {
+        "prompt": "insistently repeat a female name",
+        "direction": null,
+        "durationMs": 3000
+      },
+      {
+        "prompt": "the sound of admiring yourself in the mirror",
+        "direction": "don’t use words!",
+        "durationMs": 3500
+      },
+      {
+        "prompt": "say “thank you” in a demon voice",
+        "direction": null,
+        "durationMs": 2500
+      }
+    ]
+  },
+  {
+    "id": "114451",
+    "appearance": "LATE",
+    "videoId": "114415",
+    "title": "Power Outage - Final Round",
+    "description": "An engineer inspects wires in a server room.\nA pair of pliers cuts a blue wire.\nA city skyline goes dark.\nThe lights go out on a woman eating popcorn in her living room. \nShe throws her arms up in frustration.\nThe engineer types on a computer and smiles.",
+    "video": "powerOutage.mp4",
+    "backingTrack": "VIDEO/threePrompt/PowerOutage",
+    "slots": [
+      {
+        "prompt": "humming to yourself as you tidy up",
+        "direction": "don’t use words!",
+        "durationMs": 4000
+      },
+      {
+        "prompt": "the sound of a robot powering down",
+        "direction": "don’t use words!",
+        "durationMs": 2000
+      },
+      {
+        "prompt": "generic exclamations of frustration",
+        "direction": null,
+        "durationMs": 2000
+      }
+    ]
+  },
+  {
+    "id": "114610",
+    "appearance": "MID-GAME",
+    "videoId": "113323",
+    "title": "Group Middle Finger - Photo",
+    "description": "A group of young businesspeople defiantly raise their middle fingers.",
+    "video": "groupMiddleFinger.mp4",
+    "backingTrack": "VIDEO/singlePrompt/GroupMiddleFinger",
+    "slots": [
+      {
+        "prompt": "something you’d say before snapping someone’s photo",
+        "direction": null,
+        "durationMs": 3000
+      }
+    ]
+  },
+  {
+    "id": "114611",
+    "appearance": "EARLY",
+    "videoId": "113548",
+    "title": "Clown Alley - Yodeling",
+    "description": "A row of open-mouthed clown figurines at a local fair.",
+    "video": "clownAlley.mp4",
+    "backingTrack": "VIDEO/singlePrompt/ClownAlley",
+    "slots": [
+      {
+        "prompt": "aggressive yodeling",
+        "direction": null,
+        "durationMs": 2750
+      }
+    ]
+  },
+  {
+    "id": "114697",
+    "appearance": "MID-GAME",
+    "videoId": "113563",
+    "title": "Eyeballs - Attention",
+    "description": "A close-up shows a dozen frantically moving eyeballs.",
+    "video": "eyeballs.mp4",
+    "backingTrack": "VIDEO/singlePrompt/Eyeballs",
+    "slots": [
+      {
+        "prompt": "a short way to get someone’s attention",
+        "direction": null,
+        "durationMs": 2800
+      }
+    ]
+  },
+  {
+    "id": "114748",
+    "appearance": "MID-GAME",
+    "videoId": "113539",
+    "title": "Witchy Woman - Wish",
+    "description": "A witch sits in a pentagram, casting spells over a potion.",
+    "video": "witchyWoman.mp4",
+    "backingTrack": "VIDEO/singlePrompt/WitchyWoman",
+    "slots": [
+      {
+        "prompt": "a diabolical wish",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  },
+  {
+    "id": "114749",
+    "appearance": "MID-GAME",
+    "videoId": "113539",
+    "title": "Witchy Woman - Pie",
+    "description": "A witch sits in a pentagram, casting spells over a potion.",
+    "video": "witchyWoman.mp4",
+    "backingTrack": "VIDEO/singlePrompt/WitchyWoman",
+    "slots": [
+      {
+        "prompt": "the ingredients to a disgusting pie",
+        "direction": null,
+        "durationMs": 4000
+      }
+    ]
+  }
+]
