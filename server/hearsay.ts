@@ -300,6 +300,14 @@ api.get('/:code/hearsay/state', async (c) => {
         }>()
     : null;
   const plan = round ? (JSON.parse(round.plan_json) as RoundPlan) : null;
+  const minigameTallies =
+    round?.stage === 'intermission'
+      ? await c.env.DB.prepare(
+          'SELECT player_id, tally FROM hearsay_minigame_tallies WHERE round_id = ?',
+        )
+          .bind(round.id)
+          .all<{ player_id: string; tally: number }>()
+      : null;
   const matchup = round ? await activeMatchup(c.env.DB, round) : null;
   const choices = round && matchup ? await choicesFor(c.env.DB, round.id, matchup) : [];
   const sceneWinners =
@@ -366,6 +374,11 @@ api.get('/:code/hearsay/state', async (c) => {
     stage: round?.stage ?? 'lobby',
     deadlineAt: round?.deadline_at ?? null,
     minigame: round ? ['bop', 'dots', 'jump'][round.round_number - 1] : null,
+    minigameTallies:
+      minigameTallies?.results.map((entry) => ({
+        playerId: entry.player_id,
+        tally: entry.tally,
+      })) ?? [],
     currentMatchup: round?.current_matchup ?? -1,
     players: players.results.map((player) => ({
       id: player.id,
@@ -440,13 +453,16 @@ api.post('/:code/hearsay/intermission/tally', async (c) => {
     return c.json({ error: 'Intermission is closed' }, 409);
   }
   const result = await c.env.DB.prepare(
-    `INSERT INTO hearsay_minigame_tallies (round_id, player_id, tally)
-     SELECT ?, ?, 1 FROM hearsay_rounds WHERE id = ? AND stage = 'intermission' AND deadline_at > ?
-     ON CONFLICT(round_id, player_id) DO UPDATE SET tally = MIN(tally + 1, 100)`,
+    `INSERT INTO hearsay_minigame_tallies (round_id, player_id, tally, last_tally_at)
+     SELECT ?, ?, 1, ? FROM hearsay_rounds WHERE id = ? AND stage = 'intermission' AND deadline_at > ?
+     ON CONFLICT(round_id, player_id) DO UPDATE SET
+       tally = MIN(tally + 1, 100), last_tally_at = excluded.last_tally_at
+     WHERE excluded.last_tally_at - last_tally_at >= 150`,
   )
-    .bind(round.id, access.playerId, round.id, Date.now())
+    .bind(round.id, access.playerId, Date.now(), round.id, Date.now())
     .run();
-  if (result.meta.changes !== 1) return c.json({ error: 'Intermission is closed' }, 409);
+  if (result.meta.changes !== 1)
+    return c.json({ error: 'Tally was too soon or intermission closed' }, 429);
   return c.json({ ok: true });
 });
 

@@ -367,6 +367,105 @@ small {
   background: #a9e4ff;
   transition: width 80ms linear;
 }
+.voice-board {
+  position: relative;
+  height: 230px;
+  margin: 20px 0;
+  overflow: hidden;
+  border: 2px solid #76a9e4;
+  border-radius: 16px;
+  background: #0e3369;
+}
+.voice-ball,
+.voice-dot,
+.voice-snake,
+.voice-runner,
+.voice-obstacle {
+  position: absolute;
+  display: block;
+}
+.voice-ball {
+  left: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #a9e4ff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 8px #a9e4ff33;
+}
+.voice-goal {
+  position: absolute;
+  left: 12px;
+  color: #a9e4ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.voice-goal-high {
+  top: 12px;
+}
+.voice-goal-low {
+  bottom: 12px;
+}
+.voice-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #a9e4ff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 6px #a9e4ff33;
+}
+.voice-snake {
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+.voice-ground {
+  position: absolute;
+  top: 87%;
+  width: 100%;
+  border-top: 3px solid #76a9e4;
+}
+.voice-runner {
+  left: 22%;
+  color: #a9e4ff;
+  font-size: 38px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+.voice-obstacle {
+  top: 75%;
+  width: 14px;
+  height: 28px;
+  background: #fff;
+  border-radius: 4px 4px 0 0;
+}
+.voice-standings {
+  list-style: none;
+  margin: 18px 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  max-height: 360px;
+  overflow: auto;
+}
+.voice-standings li {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) minmax(70px, 2fr) 2ch;
+  align-items: center;
+  gap: 10px;
+}
+.voice-progress {
+  height: 12px;
+  border-radius: 6px;
+  background: #0e3369;
+  overflow: hidden;
+}
+.voice-progress i {
+  display: block;
+  height: 100%;
+  background: #a9e4ff;
+}
 h2 {
   font:
     700 20px 'Space Grotesk',

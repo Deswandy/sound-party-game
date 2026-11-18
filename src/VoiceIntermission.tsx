@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
+import { createVoiceGame, stepVoiceGame, type VoiceGameKind } from '../shared/voice-games';
 
 const instructions = {
-  bop: 'Use your volume to move the ball up and down. Make as many reps as you can.',
-  dots: 'Use your volume to steer the snake toward the dots.',
-  jump: 'Use your volume to jump. Make as many jumps as you can.',
+  bop: 'Get loud to lift the ball, then quiet to drop it. Each full trip scores.',
+  dots: 'Change your volume to guide the snake into each dot.',
+  jump: 'Make a sound as an obstacle approaches to jump over it.',
 };
 
 export function VoiceIntermission({
@@ -14,14 +15,17 @@ export function VoiceIntermission({
 }: {
   code: string;
   token: string;
-  kind: 'bop' | 'dots' | 'jump';
+  kind: VoiceGameKind;
   deadlineAt: number;
 }) {
   const stream = useRef<MediaStream | null>(null);
   const context = useRef<AudioContext | null>(null);
   const frame = useRef<number | null>(null);
-  const [level, setLevel] = useState(0);
-  const [tallies, setTallies] = useState(0);
+  const game = useRef(createVoiceGame(kind));
+  const lastFrame = useRef(0);
+  const lastPaint = useRef(0);
+  const disposed = useRef(false);
+  const [picture, setPicture] = useState(game.current);
   const [active, setActive] = useState(false);
   const [error, setError] = useState('');
 
@@ -34,26 +38,55 @@ export function VoiceIntermission({
     context.current = null;
     setActive(false);
   }
-  useEffect(() => () => stop(), []);
+  useEffect(
+    () => () => {
+      disposed.current = true;
+      stop();
+    },
+    [],
+  );
+
+  async function submitTally() {
+    try {
+      const response = await fetch(`/api/rooms/${code}/hearsay/intermission/tally`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok && ![409, 429].includes(response.status))
+        throw new Error('Could not save a tally');
+    } catch {
+      setError('A tally could not be saved. Check your connection.');
+    }
+  }
 
   async function start() {
+    if (Date.now() >= deadlineAt) return;
     if (!navigator.mediaDevices?.getUserMedia) {
       setError('Microphone input is unavailable in this browser.');
       return;
     }
     try {
       const mic = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (disposed.current || Date.now() >= deadlineAt) {
+        mic.getTracks().forEach((track) => track.stop());
+        return;
+      }
+      stream.current = mic;
       const audio = new AudioContext();
+      context.current = audio;
+      await audio.resume();
+      if (disposed.current || Date.now() >= deadlineAt) {
+        stop();
+        return;
+      }
       const analyser = audio.createAnalyser();
       analyser.fftSize = 1024;
       audio.createMediaStreamSource(mic).connect(analyser);
       const samples = new Uint8Array(analyser.fftSize);
-      stream.current = mic;
-      context.current = audio;
+      setError('');
       setActive(true);
-      let above = false;
-      let lastTally = 0;
-      function tick() {
+      lastFrame.current = performance.now();
+      function tick(time: number) {
         if (Date.now() >= deadlineAt) {
           stop();
           return;
@@ -62,21 +95,17 @@ export function VoiceIntermission({
         let sum = 0;
         for (const sample of samples) sum += ((sample - 128) / 128) ** 2;
         const rms = Math.sqrt(sum / samples.length);
-        setLevel(Math.min(100, Math.round(rms * 400)));
-        const threshold = kind === 'jump' ? 0.16 : kind === 'dots' ? 0.09 : 0.12;
-        if (rms > threshold && !above && Date.now() - lastTally > 350) {
-          above = true;
-          lastTally = Date.now();
-          setTallies((current) => current + 1);
-          void fetch(`/api/rooms/${code}/hearsay/intermission/tally`, {
-            method: 'POST',
-            headers: { Authorization: `Bearer ${token}` },
-          });
+        const before = game.current.tally;
+        game.current = stepVoiceGame(game.current, rms, time - lastFrame.current);
+        lastFrame.current = time;
+        if (game.current.tally > before) void submitTally();
+        if (time - lastPaint.current > 40) {
+          setPicture(game.current);
+          lastPaint.current = time;
         }
-        if (rms < threshold * 0.5) above = false;
         frame.current = requestAnimationFrame(tick);
       }
-      tick();
+      frame.current = requestAnimationFrame(tick);
     } catch (cause) {
       stop();
       setError(
@@ -91,20 +120,49 @@ export function VoiceIntermission({
     <div class="voice-game">
       <h2>{kind === 'bop' ? 'Ups & Downs' : kind === 'dots' ? 'Nibble Noises' : 'Hup Hop'}</h2>
       <p>{instructions[kind]}</p>
+      <div class={`voice-board voice-board-${kind}`} aria-label={`${kind} voice game`}>
+        {kind === 'bop' && (
+          <>
+            <span class="voice-goal voice-goal-high">LOUD</span>
+            <span class="voice-goal voice-goal-low">QUIET</span>
+            <span class="voice-ball" style={{ top: `${picture.y}%` }} />
+          </>
+        )}
+        {kind === 'dots' && (
+          <>
+            <span
+              class="voice-dot"
+              style={{ left: `${picture.targetX}%`, top: `${picture.targetY}%` }}
+            />
+            <span class="voice-snake" style={{ left: `${picture.x}%`, top: `${picture.y}%` }}>
+              ◉
+            </span>
+          </>
+        )}
+        {kind === 'jump' && (
+          <>
+            <span class="voice-ground" />
+            <span class="voice-runner" style={{ top: `${picture.y}%` }}>
+              ●
+            </span>
+            <span class="voice-obstacle" style={{ left: `${picture.obstacleX}%` }} />
+          </>
+        )}
+      </div>
       <div
         class="meter"
         role="meter"
         aria-label="Microphone level"
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-valuenow={level}
+        aria-valuenow={Math.round(picture.level * 100)}
       >
-        <span style={{ width: `${level}%` }} />
+        <span style={{ width: `${picture.level * 100}%` }} />
       </div>
       <strong>
-        {tallies} {tallies === 1 ? 'tally' : 'tallies'}
+        {picture.tally} {picture.tally === 1 ? 'tally' : 'tallies'}
       </strong>
-      <button onClick={() => (active ? stop() : void start())}>
+      <button disabled={Date.now() >= deadlineAt} onClick={() => (active ? stop() : void start())}>
         {active ? 'Stop microphone' : 'Start voice game'}
       </button>
       {error && (

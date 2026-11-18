@@ -199,6 +199,7 @@ export const hearsayMinigameTallies = sqliteTable(
       .notNull()
       .references(() => players.id),
     tally: integer('tally').notNull().default(0),
+    lastTallyAt: integer('last_tally_at').notNull().default(0),
   },
   (table) => [primaryKey({ columns: [table.roundId, table.playerId] })],
 );

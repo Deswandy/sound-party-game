@@ -423,6 +423,22 @@ function App() {
                             : 'Hup Hop'}
                       </h2>
                       <p>Players use their microphones for 15 seconds.</p>
+                      <ul class="voice-standings">
+                        {state.players.map((player) => {
+                          const tally =
+                            state.minigameTallies.find((entry) => entry.playerId === player.id)
+                              ?.tally ?? 0;
+                          return (
+                            <li key={player.id}>
+                              <span>{player.name}</span>
+                              <span class="voice-progress">
+                                <i style={{ width: `${Math.min(100, tally * 5)}%` }} />
+                              </span>
+                              <strong>{tally}</strong>
+                            </li>
+                          );
+                        })}
+                      </ul>
                       <button
                         disabled={busy || deadlineSeconds > 0}
                         onClick={() => void action('hearsay/intermission/finish')}

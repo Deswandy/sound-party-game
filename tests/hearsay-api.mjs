@@ -54,6 +54,14 @@ assert.equal(
   200,
 );
 assert.equal(
+  (await request(`${path}/hearsay/intermission/tally`, 'POST', alice.playerToken)).status,
+  429,
+);
+assert.deepEqual(
+  (await request(`${path}/hearsay/state`, 'GET', room.hostToken)).body.minigameTallies,
+  [{ playerId: alice.playerId, tally: 1 }],
+);
+assert.equal(
   (await request(`${path}/hearsay/intermission/finish`, 'POST', room.hostToken)).status,
   200,
 );

@@ -16,7 +16,7 @@ Database migrations are generated from `db/schema.ts` with `npm run db:generate`
 
 With the local Worker running, `npm run test:recording` checks prompt authorization, clip replacement, the 30-second upload limit, submission counts, and late-upload rejection.
 `npm run test:game-loop` checks the full three-round flow, including anonymous audio access, voting rules, ties, scores, and replay.
-`npm run test:hearsay` checks content and round assignment for 2–20 players, and `npm run test:hearsay-api` checks the new three-round API, scoring, soundboard, and 20-player assignment.
+`npm run test:hearsay` checks content and round assignment for 2–20 players, `npm run test:hearsay-api` checks the new three-round API, scoring, soundboard, and 20-player assignment, and `npm run test:voice-games` checks the voice-game scoring simulations.
 
 ## Plans
 

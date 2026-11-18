@@ -10,6 +10,7 @@
     "test:game-loop": "node tests/game-loop-api.mjs",
     "test:hearsay": "node tests/hearsay-plan.mjs",
     "test:hearsay-api": "node tests/hearsay-api.mjs",
+    "test:voice-games": "node tests/voice-games.mjs",
     "db:generate": "drizzle-kit generate",
     "format": "oxfmt src server shared scripts tests db index.html vite.config.ts tsconfig.json package.json drizzle.config.ts",
     "format:check": "oxfmt --check src server shared scripts tests db index.html vite.config.ts tsconfig.json package.json drizzle.config.ts",

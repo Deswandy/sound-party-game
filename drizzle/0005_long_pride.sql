@@ -1,0 +1,1 @@
+ALTER TABLE `hearsay_minigame_tallies` ADD `last_tally_at` integer DEFAULT 0 NOT NULL;

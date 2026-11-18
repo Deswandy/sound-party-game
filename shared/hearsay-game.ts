@@ -46,6 +46,7 @@ export type HearSayState = {
   stage: HearSayStage;
   deadlineAt: number | null;
   minigame: 'bop' | 'dots' | 'jump' | null;
+  minigameTallies: { playerId: string; tally: number }[];
   currentMatchup: number;
   players: {
     id: string;
