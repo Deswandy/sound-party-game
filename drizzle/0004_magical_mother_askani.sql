@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `hearsay_round_room_number` ON `hearsay_rounds` (`room_id`,`round_number`);

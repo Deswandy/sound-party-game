@@ -135,6 +135,45 @@ small {
 .lobby {
   width: min(100%, 560px);
 }
+.lobby:has(.hearsay-scene) {
+  width: min(100%, 900px);
+}
+.hearsay-scene {
+  position: relative;
+  margin: 20px 0;
+}
+.hearsay-scene video {
+  display: block;
+  width: 100%;
+  max-height: 60vh;
+  border: 1px solid #76a9e4;
+  border-radius: 12px;
+  background: #0e3369;
+}
+.scene-voice {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #0e3369;
+  color: #fff;
+  font-weight: 700;
+}
+.sound-assignment,
+.sound-choice {
+  border-top: 1px solid #76a9e4;
+  margin-top: 20px;
+  padding-top: 18px;
+}
+.sound-choice audio {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+.voice-game .meter {
+  margin: 20px 0;
+}
 .room-heading {
   display: flex;
   justify-content: space-between;

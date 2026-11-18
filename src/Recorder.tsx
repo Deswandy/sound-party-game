@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
 
-const maxDurationMs = 30_000;
 const acceptedTypes = [
   'audio/webm;codecs=opus',
   'audio/mp4',
@@ -15,18 +14,24 @@ export function Recorder({
   token,
   submitted,
   onSubmitted,
+  maxDurationMs = 30_000,
+  uploadPath,
+  note = 'Mute your meeting microphone before recording. Your clip will be heard by this room.',
 }: {
   code: string;
   token: string;
   submitted: boolean;
   onSubmitted: () => void;
+  maxDurationMs?: number;
+  uploadPath?: string;
+  note?: string;
 }) {
   const recorder = useRef<MediaRecorder | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const ticker = useRef<ReturnType<typeof setInterval> | null>(null);
   const [recording, setRecording] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [secondsLeft, setSecondsLeft] = useState(Math.ceil(maxDurationMs / 1000));
   const [preview, setPreview] = useState<Preview | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
@@ -83,10 +88,7 @@ export function Recorder({
         releaseMicrophone();
       };
       next.onstop = () => {
-        const durationMs = Math.max(
-          1,
-          Math.min(maxDurationMs, Math.round(performance.now() - started)),
-        );
+        const durationMs = Math.max(1, Math.round(performance.now() - started));
         const blob = new Blob(chunks, { type: next.mimeType });
         releaseMicrophone();
         if (blob.size) {
@@ -96,7 +98,7 @@ export function Recorder({
       };
       setPreview(null);
       setUploaded(false);
-      setSecondsLeft(30);
+      setSecondsLeft(Math.ceil(maxDurationMs / 1000));
       next.start(250);
       setRecording(true);
       const deadline = started + maxDurationMs;
@@ -122,7 +124,7 @@ export function Recorder({
     setUploading(true);
     setError('');
     try {
-      const response = await fetch(`/api/rooms/${code}/clips`, {
+      const response = await fetch(uploadPath ?? `/api/rooms/${code}/clips`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -144,9 +146,7 @@ export function Recorder({
 
   return (
     <div class="recorder">
-      <p class="recording-note">
-        Mute your meeting microphone before recording. Your clip will be heard by this room.
-      </p>
+      <p class="recording-note">{note}</p>
       {recording ? (
         <>
           <div class="timer" role="timer">
