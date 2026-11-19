@@ -11,6 +11,7 @@ import type {
   RoundResult,
   ScoreEntry,
 } from '../shared/game';
+import hearsayApi from './hearsay';
 
 type Bindings = {
   DB: D1Database;
@@ -696,5 +697,7 @@ app.delete('/api/rooms/:code/players/:id', async (c) => {
   if (result.meta.changes !== 1) return c.json({ error: 'Player not found' }, 404);
   return c.json({ ok: true });
 });
+
+app.route('/api/rooms', hearsayApi);
 
 export default app;

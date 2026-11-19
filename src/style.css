@@ -135,6 +135,45 @@ small {
 .lobby {
   width: min(100%, 560px);
 }
+.lobby:has(.hearsay-scene) {
+  width: min(100%, 900px);
+}
+.hearsay-scene {
+  position: relative;
+  margin: 20px 0;
+}
+.hearsay-scene video {
+  display: block;
+  width: 100%;
+  max-height: 60vh;
+  border: 1px solid #76a9e4;
+  border-radius: 12px;
+  background: #0e3369;
+}
+.scene-voice {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #0e3369;
+  color: #fff;
+  font-weight: 700;
+}
+.sound-assignment,
+.sound-choice {
+  border-top: 1px solid #76a9e4;
+  margin-top: 20px;
+  padding-top: 18px;
+}
+.sound-choice audio {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+.voice-game .meter {
+  margin: 20px 0;
+}
 .room-heading {
   display: flex;
   justify-content: space-between;
@@ -327,6 +366,176 @@ small {
   height: 100%;
   background: #a9e4ff;
   transition: width 80ms linear;
+}
+.voice-board {
+  position: relative;
+  height: 230px;
+  margin: 20px 0;
+  overflow: hidden;
+  border: 2px solid #76a9e4;
+  border-radius: 16px;
+  background: #0e3369;
+}
+.voice-ball,
+.voice-dot,
+.voice-snake,
+.voice-runner,
+.voice-obstacle {
+  position: absolute;
+  display: block;
+}
+.voice-ball {
+  left: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #a9e4ff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 8px #a9e4ff33;
+}
+.voice-goal {
+  position: absolute;
+  left: 12px;
+  color: #a9e4ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.voice-goal-high {
+  top: 12px;
+}
+.voice-goal-low {
+  bottom: 12px;
+}
+.voice-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #a9e4ff;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 6px #a9e4ff33;
+}
+.voice-snake {
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+.voice-ground {
+  position: absolute;
+  top: 87%;
+  width: 100%;
+  border-top: 3px solid #76a9e4;
+}
+.voice-runner {
+  left: 22%;
+  color: #a9e4ff;
+  font-size: 38px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+.voice-obstacle {
+  top: 75%;
+  width: 14px;
+  height: 28px;
+  background: #fff;
+  border-radius: 4px 4px 0 0;
+}
+.voice-standings {
+  list-style: none;
+  margin: 18px 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  max-height: 360px;
+  overflow: auto;
+}
+.voice-standings li {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) minmax(70px, 2fr) 2ch;
+  align-items: center;
+  gap: 10px;
+}
+.round-active > audio {
+  display: block;
+  width: 100%;
+  margin: 14px 0;
+}
+.warmup-results li {
+  grid-template-columns: minmax(80px, 1fr) auto auto;
+}
+.blooper-reel {
+  padding: 18px;
+  border: 2px solid #76a9e4;
+  border-radius: 16px;
+  background: #0e3369;
+}
+.foley-stage {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+  min-height: 240px;
+  padding: 20px;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 16px;
+  background: #102d55;
+  border: 3px solid #76a9e4;
+}
+.foley-stage-replay {
+  border-style: dashed;
+}
+.foley-stage-action {
+  font-size: clamp(48px, 12vw, 100px);
+  animation: scene-pop 430ms ease-out both;
+}
+@keyframes scene-pop {
+  from {
+    transform: translateY(16px) scale(0.65);
+    opacity: 0.45;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .foley-stage-action {
+    animation: none;
+  }
+}
+.blooper-heading {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.blooper-heading span:first-child {
+  color: #a9e4ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.blooper-heading strong {
+  font-size: 22px;
+}
+.blooper-controls {
+  display: flex;
+  gap: 10px;
+}
+.blooper-controls button {
+  flex: 1;
+}
+
+.voice-progress {
+  height: 12px;
+  border-radius: 6px;
+  background: #0e3369;
+  overflow: hidden;
+}
+.voice-progress i {
+  display: block;
+  height: 100%;
+  background: #a9e4ff;
 }
 h2 {
   font:
